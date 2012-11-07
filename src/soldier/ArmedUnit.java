@@ -1,6 +1,8 @@
 package soldier;
 
-public interface ArmedUnit {
+import army.Army;
+
+public interface ArmedUnit extends Army{
 	public String getName();
 
 	public float getHealthPoints();
