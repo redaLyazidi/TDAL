@@ -1,6 +1,6 @@
 package soldier;
 
-abstract class SoldierAbstract implements SoldierChecked {
+abstract class SoldierAbstract implements Soldier {
 	protected String name;
 	protected float healthPoints;
 	protected float force;
@@ -23,7 +23,7 @@ abstract class SoldierAbstract implements SoldierChecked {
 		return getHealthPoints() > 0;
 	}
 
-	public boolean parry(float force) {
+	public boolean parry(float force) { // default: no parry effect
 		healthPoints = (getHealthPoints() > force) ? getHealthPoints() - force
 				: 0;
 		return healthPoints > 0;
@@ -31,11 +31,5 @@ abstract class SoldierAbstract implements SoldierChecked {
 
 	public float strike() {
 		return alive() ? force : 0;
-	}
-
-	public int countWeaponOccurrences(Class<?> className) {
-		return 0; 
-		// XXX seems useless: 
-		// this.getClass().equals(className) ? 1 : 0;
 	}
 }

@@ -8,9 +8,8 @@ public interface Soldier {
 	public boolean alive();
 
 	public void heal();
-	
-	// return false if dead, true otherwise:
-	public boolean parry(float force); 
 
-	public float strike();	
+	public boolean parry(float force);
+
+	public float strike();
 }

@@ -1,11 +1,10 @@
 package weapon;
 
-import soldier.SoldierChecked;
+import soldier.Soldier;
 
 public class SoldierWithShield extends SoldierArmed<Shield> {
 
-	public SoldierWithShield(SoldierChecked s) {
+	public SoldierWithShield(Soldier s) {
 		super(s, new Shield());
 	}
-
 }

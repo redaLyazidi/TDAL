@@ -1,19 +1,15 @@
 package weapon;
 
-import soldier.SoldierChecked;
+import soldier.Soldier;
 
-public abstract class SoldierArmed<W extends Weapon> implements SoldierChecked {
-	protected SoldierChecked soldier;
+public abstract class SoldierArmed<W extends Weapon> implements Soldier {
+	protected Soldier soldier;
 	protected W weapon;
-	private static final int sameClassCountMax = 1;
+	private static final float WEARINESS_COEF = 0; // XXX temporarily inhibited
 
-	SoldierArmed(SoldierChecked s, W a) throws BreakingRuleException {
+	SoldierArmed(Soldier s, W a) {
 		soldier = s;
 		weapon = a;
-		// check the number of soldiers of the same kind
-		// in the decoration sequence:
-		if (soldier.countWeaponOccurrences(this.getClass()) >= sameClassCountMax)
-			throw new BreakingRuleException("too many occurrences");
 	}
 
 	public String getName() {
@@ -32,19 +28,22 @@ public abstract class SoldierArmed<W extends Weapon> implements SoldierChecked {
 		soldier.heal();
 	}
 
+	public void fixWeapon() {
+		weapon.fix();
+	}
+
 	public boolean parry(float force) {
 		float effectiveForce = force - weapon.getParryValue();
+		if (effectiveForce <= 1)
+			effectiveForce = 1;
+		// Effective force is at least 1 (weariness effect)
+		weapon.damageCompute(WEARINESS_COEF);
 		return soldier.parry(effectiveForce);
 	}
 
 	public float strike() {
 		float force = soldier.strike() + weapon.getStrikeValue();
+		weapon.damageCompute(WEARINESS_COEF);
 		return force;
-	}
-
-	public int countWeaponOccurrences(Class<?> className) {
-		int sameClassesCount = soldier.countWeaponOccurrences(className);
-		return this.getClass().equals(className) ? 
-				sameClassesCount + 1 : sameClassesCount;
 	}
 }

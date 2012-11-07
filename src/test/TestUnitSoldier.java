@@ -1,74 +1,51 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import soldier.*;
-import weapon.*;
+import soldier.ArmedUnit;
+import soldier.ArmedUnitSoldier;
+import soldier.UnknownSoldierTypeException;
 
 public class TestUnitSoldier {
-	SoldierChecked si, sc, si_sh, si_sw, si_multiple;
+	ArmedUnit sf, sc;
 
 	@Before
 	public void setUp() throws Exception {
-		si = new InfantryMan("Gogol");
-		sc = new Horseman("Sanchez");
+		sf = new ArmedUnitSoldier("InfantryMan", "Gogol");
+		sc = new ArmedUnitSoldier("Horseman", "Sanchez");
 	}
 
-	@Test
+	@Test(expected = UnknownSoldierTypeException.class)
 	public void combat() {
 		int i;
-		for (i = 0; si.parry(sc.strike()); i++) {
-			System.out.println("health of " + si.getName() +  " : " + si.getHealthPoints());
+		for (i = 0; sf.parry(sc.strike()); i++) {
+			;
 		}
-		assertEquals("Unexpected death of soldier " + si.getName(), i, 4);
+		assertEquals("Unexpected death of squad " + sf.getName(), i, 4);
 
-		si.heal();  //resurrection
-		si_sh = new SoldierWithShield(si);
-		for (i = 0; si_sh.parry(sc.strike()); i++) {
-			System.out.println("health of " + si_sh.getName() + " : " +  si_sh.getHealthPoints());
-		}; 
-		assertEquals("Unexpected death of  " + si_sh.getName() + " with shield", i, 9);
-
-		si_sh.heal(); //resurrection
-		si_sw = new SoldierWithSword(si_sh);
-		for (i = 0; si_sw.parry(sc.strike()); i++) {
-			System.out.println("health of " + si_sw.getName() + " : " +  si_sw.getHealthPoints());	
+		sf.heal();
+ 		sf.addEquipment("Shield");
+		for (i = 0; sf.parry(sc.strike()); i++) {
+			;
 		}
-		assertEquals("Unexpected death of " + si_sw.getName() + " with shield and sword", i, 11);
+		assertEquals("Unexpected death of  " + sf.getName() + " with shield", i, 9);
 
-		si.heal();
-		for (i = 0; sc.parry(si_sw.strike()); i++) { 	
-			System.out.println("health of " + sc.getName() + " : " +  sc.getHealthPoints());
+		sf.heal();
+		sf.addEquipment("Sword");
+		for (i = 0; sf.parry(sc.strike()); i++) {
+			;
 		}
-		assertEquals("Unexpected death of " + sc.getName(), i, 3);		
+		assertEquals("Unexpected death of " + sf.getName() + " with shield and sword", i, 11);
+ 		 
+        sf.heal();
+		for (i = 0; sc.parry(sf.strike()); i++) {
+			;
+		}
+		assertEquals("Unexpected death of " + sc.getName(), i, 3);
+ 
+ 		new ArmedUnitSoldier("Poilu", "Gogol"); //exception raised : unknown soldier type
 	}
-
-	// Tests for rules of decoration
-	@Test(expected = BreakingRuleException.class)
-	public void tooManyDecorations1() {
-		si_multiple = new SoldierWithShield(new SoldierWithShield(si));
-	}
-	
-	@Test(expected = BreakingRuleException.class)
-	public void tooManyDecorations2() {
-		si_multiple = new SoldierWithSword(new SoldierWithSword(si));
-	}
-
-	@Test 
-	public void notTooManyDecorations1() {
-		si_multiple = new SoldierWithShield(new SoldierWithSword(si));
-		assert(true);
-	}
-	
-	@Test 
-	public void notTooManyDecorations2() {
-		si_multiple = new SoldierWithSword(new SoldierWithShield(si));
-		assert(true);
-	}
-	
-	
 }
-
