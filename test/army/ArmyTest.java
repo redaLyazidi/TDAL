@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class ArmyTest {
 
+	private Army army;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -20,6 +22,7 @@ public class ArmyTest {
 
 	@Before
 	public void setUp() throws Exception {
+		army = new Squadron("Main");
 	}
 
 	@After
@@ -28,7 +31,8 @@ public class ArmyTest {
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		assertEquals(army.getName(), "Main");
+		assertNotSame(army.getName(), "main");
 	}
 
 	@Test
