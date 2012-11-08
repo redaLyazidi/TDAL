@@ -50,4 +50,20 @@ public abstract class SoldierArmed<W extends Weapon> implements Soldier {
 		weapon.damageCompute(WEARINESS_COEF);
 		return force;
 	}
+	
+	protected float averageStats() {
+		return (soldier.getHealthPoints() + soldier.strike()) / 2; 
+	}
+	
+	public int soldiercmp(Soldier s) {
+		float statS = ((SoldierArmed) s).averageStats();
+		float statThis = this.averageStats();
+		if(statThis > statS)
+			return 1;
+		else if (statThis == statS) {
+			return 0;
+		}
+		else 
+			return -1;
+	}
 }

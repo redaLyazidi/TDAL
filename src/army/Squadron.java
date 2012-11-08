@@ -94,4 +94,12 @@ public class Squadron implements Army {
 			a.addEquipment(weaponType);
 	}
 
+	public void addArmy(Army army) {
+		regiment.add(army);
+	}
+
+	public void addAllArmies(List<Army> listArmy) {
+		regiment.addAll(listArmy);
+	}
+	
 }

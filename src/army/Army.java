@@ -1,5 +1,7 @@
 package army;
 
+import java.util.List;
+
 public interface Army {
 	public String getName();
 

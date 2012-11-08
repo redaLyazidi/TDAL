@@ -3,6 +3,9 @@ package soldier;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
+
+import army.Army;
+
 import weapon.SoldierArmed;
 
 public class ArmedUnitSoldier implements ArmedUnit {
@@ -80,5 +83,6 @@ public class ArmedUnitSoldier implements ArmedUnit {
 	public boolean parry(float force) {
 		return soldier.parry(force);
 	}
+
 
 }

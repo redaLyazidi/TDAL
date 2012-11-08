@@ -14,4 +14,5 @@ public interface Soldier {
 	public boolean parry(float force);
 
 	public float strike();
+
 }
