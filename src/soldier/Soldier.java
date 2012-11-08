@@ -9,6 +9,8 @@ public interface Soldier {
 
 	public void heal();
 
+	public void infuse_life();
+	
 	public boolean parry(float force);
 
 	public float strike();

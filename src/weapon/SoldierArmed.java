@@ -28,6 +28,10 @@ public abstract class SoldierArmed<W extends Weapon> implements Soldier {
 		soldier.heal();
 	}
 
+	public void infuse_life() {
+		soldier.infuse_life();
+	}
+	
 	public void fixWeapon() {
 		weapon.fix();
 	}

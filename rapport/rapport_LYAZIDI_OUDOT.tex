@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{amsthm}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{pict2e}
+\usepackage{listing}
+\usepackage{url}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage[DIV15]{typearea}
+\title{Rapport sur l'état des armées}
+\author{LYAZIDI Reda  \hspace*{1cm} OUDOT Maxime}
+\date{\today}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+\section*{Introduction}
+
+\section{L'Existant}
+\subsection{Description}
+\subsection{Modifications apportées}
+Dans le code de l'existant la méthode "heal" soignait même si le soldat était mort,
+dans le but de tests pour le \textbf{Composite}, il a été décidé d'implémenter \underline{\textbf{deux}} méthodes :
+\begin{enumerate}
+ \item \textbf{infuse\_life} étant la "heal" de départ donc ressuscitant aussi
+ \item \textbf{heal} qui ne ressuscite pas donc ne fonctionne que sur les soldats encore en vie.
+\end{enumerate}
+\end{document}

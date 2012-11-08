@@ -32,4 +32,10 @@ abstract class SoldierAbstract implements Soldier {
 	public float strike() {
 		return alive() ? force : 0;
 	}
+
+	//ADDED
+	protected void heal_inter(float healthPoints) {
+		if( alive())
+			this.healthPoints = healthPoints;
+	}
 }
