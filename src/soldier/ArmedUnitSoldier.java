@@ -4,8 +4,6 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import army.Army;
-
 import weapon.SoldierArmed;
 
 public class ArmedUnitSoldier implements ArmedUnit {
