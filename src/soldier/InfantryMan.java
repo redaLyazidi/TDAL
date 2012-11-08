@@ -8,7 +8,11 @@ public class InfantryMan extends SoldierAbstract {
 		super(nom, HEALTHPOINTS, FORCE);
 	}
 
-	public void heal() { // XXX resurrection allowed
+	public void infuse_life() { // XXX resurrection allowed
 		healthPoints = HEALTHPOINTS;
+	}
+	
+	public void heal() {
+		heal_inter(HEALTHPOINTS);
 	}
 }

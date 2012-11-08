@@ -13,6 +13,7 @@ public interface Army {
 
 	public float strike();
 
+	public void infuse_life();
 	// the only new method compared to Soldier
 	public void addEquipment(String weaponType); 
 }

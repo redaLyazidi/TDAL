@@ -25,22 +25,23 @@ public class TestUnitSoldier {
 			;
 		}
 		assertEquals("Unexpected death of squad " + sf.getName(), i, 4);
-
-		sf.heal();
+		System.out.println("avant le 1° infuse_life");
+		sf.infuse_life();
+		System.out.println("apres le 1° infuse_life");
  		sf.addEquipment("Shield");
 		for (i = 0; sf.parry(sc.strike()); i++) {
 			;
 		}
 		assertEquals("Unexpected death of  " + sf.getName() + " with shield", i, 9);
-
-		sf.heal();
+		System.out.println("avant le 2° infuse_life");
+		sf.infuse_life();
 		sf.addEquipment("Sword");
 		for (i = 0; sf.parry(sc.strike()); i++) {
 			;
 		}
 		assertEquals("Unexpected death of " + sf.getName() + " with shield and sword", i, 11);
  		 
-        sf.heal();
+        sf.infuse_life();
 		for (i = 0; sc.parry(sf.strike()); i++) {
 			;
 		}

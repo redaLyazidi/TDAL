@@ -70,6 +70,9 @@ public class ArmedUnitSoldier implements ArmedUnit {
 		soldier.heal();
 	}
 
+	public void infuse_life() {
+		soldier.infuse_life();
+	}
 	public float strike() {
 		return soldier.strike();
 	}

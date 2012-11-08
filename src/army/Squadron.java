@@ -8,16 +8,16 @@ public class Squadron implements Army {
 	private List<Army> regiment;
 	private String name;
 
-	
+
 	public Squadron(String name) {
 		this(name, new LinkedList<Army>());
 	}
-	
+
 	public Squadron(String name, List<Army> regiment) {
 		this.regiment = regiment;
 		this.name = name;
 	}
-	
+
 	/**
 	 * @return name
 	 * of the unit
@@ -27,10 +27,15 @@ public class Squadron implements Army {
 		return name;
 	}
 
+	/**
+	 * @return the sum of healthPoints of each member of the Army
+	 */
 	@Override
 	public float getHealthPoints() {
-		// TODO Auto-generated method stub
-		return 0;
+		float healthPoints = 0;
+		for (Army a : regiment)
+			healthPoints += a.getHealthPoints();
+		return healthPoints;
 	}
 
 	/**
@@ -49,8 +54,14 @@ public class Squadron implements Army {
 
 	@Override
 	public void heal() {
-		// TODO Auto-generated method stub
-
+		for (Army a : regiment)
+			a.heal();
+	}
+	
+	@Override
+	public void infuse_life() {
+		for (Army a : regiment)
+			a.infuse_life();
 	}
 
 	@Override
@@ -71,10 +82,16 @@ public class Squadron implements Army {
 		return strike;
 	}
 
+	/**
+	 * @param String weaponType
+	 * addEquipment to each element of the Army
+	 * the final result depends on the implementation
+	 * of Army which are sheet
+	 */
 	@Override
 	public void addEquipment(String weaponType) {
-		// TODO Auto-generated method stub
-
+		for (Army a : regiment)
+			a.addEquipment(weaponType);
 	}
 
 }
