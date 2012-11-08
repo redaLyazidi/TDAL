@@ -1,5 +1,6 @@
 package army;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -102,4 +103,11 @@ public class Squadron implements Army {
 		regiment.addAll(listArmy);
 	}
 	
+	public boolean removeArmy(Army army) {
+		return regiment.remove(army);
+	}
+	
+	public void removeAllArmies(Collection<Army> armies) {
+		regiment.removeAll(armies);
+	}
 }
