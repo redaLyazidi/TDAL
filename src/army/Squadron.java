@@ -69,7 +69,7 @@ public class Squadron implements Army {
 	public boolean parry(float force) {
 		boolean parry = false;
 		for(Army a : regiment){
-			parry = parry || a.parry(force);
+			parry =  a.parry(force / regiment.size()) || parry;
 		}
 		return parry;
 	}
