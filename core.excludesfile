@@ -3,3 +3,9 @@
 /*.properties
 /doc/
 /*.class
+/*.log
+/*.aux
+/*.bbl
+/*.toc
+/*.bak
+

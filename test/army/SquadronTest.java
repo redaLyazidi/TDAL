@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import soldier.ArmedUnit;
 import soldier.ArmedUnitSoldier;
-import soldier.Soldier;
 
 public class SquadronTest {
 	
@@ -99,15 +98,21 @@ public class SquadronTest {
 	}
 	
 	@Test
-	public void testHeal() {
+	public void testHeal() { // add and remove also tested
 		norfolk.addAllArmies(cannonFodder);
 		float healthbefore = norfolk.getHealthPoints();
 		norfolk.addArmy(achille);
 		norfolk.parry(healthbefore);
-		assertTrue(achille.alive());
 		assertTrue(norfolk.alive());
-		System.out.println(achille.strike());
-		System.out.println(norfolk.strike());
+		norfolk.heal();
+		assertTrue(norfolk.getHealthPoints() == healthbefore + achille.getHealthPoints());
+		
+		assertTrue(norfolk.removeArmy(achille));
+		assertTrue(norfolk.getHealthPoints() == healthbefore);
+		norfolk.parry(healthbefore); //they're all dead
+		assertTrue( norfolk.getHealthPoints() == 0);
+		norfolk.heal();
+		assertTrue( "OMG they're alive",norfolk.getHealthPoints() == 0);
 	}
 
 	@Test
@@ -130,18 +135,10 @@ public class SquadronTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	public void testAddArmy() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testAddAllArmies() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRemoveArmy() {
 		fail("Not yet implemented");
 	}
 
