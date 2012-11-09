@@ -18,22 +18,22 @@ import soldier.ArmedUnit;
 import soldier.ArmedUnitSoldier;
 
 public class SquadronTest {
-	
+
 	private final static String[] array_soldierType = {"InfantryMan", "Horseman", "Hero"};
 	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron"};
-	
+
 	private final static int nbcannonFodder = 100;
-	
+
 	private Squadron monkeys;
 	private Squadron rabbids;
 	private Squadron norfolk;
-	
+
 	private List<ArmedUnit> cannonFodder;
-	
+
 	private Army achille;
-	
-	
-	
+
+
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -96,7 +96,7 @@ public class SquadronTest {
 		while(s.alive())
 			s.parry(s.strike());
 	}
-	
+
 	@Test
 	public void testHeal() { // add and remove also tested
 		norfolk.addAllArmies(cannonFodder);
@@ -106,7 +106,7 @@ public class SquadronTest {
 		assertTrue(norfolk.alive());
 		norfolk.heal();
 		assertTrue(norfolk.getHealthPoints() == healthbefore + achille.getHealthPoints());
-		
+
 		assertTrue(norfolk.removeArmy(achille));
 		assertTrue(norfolk.getHealthPoints() == healthbefore);
 		norfolk.parry(healthbefore); //they're all dead
@@ -117,7 +117,13 @@ public class SquadronTest {
 
 	@Test
 	public void testInfuse_life() {
-		fail("Not yet implemented");
+		norfolk.addAllArmies(cannonFodder);
+		float healthbefore = norfolk.getHealthPoints();
+		assertTrue(norfolk.alive());
+		norfolk.parry(healthbefore);
+		assertFalse(norfolk.alive());
+		norfolk.infuse_life();
+		assertTrue(norfolk.getHealthPoints() == healthbefore);
 	}
 
 	@Test
@@ -135,7 +141,7 @@ public class SquadronTest {
 		fail("Not yet implemented");
 	}
 
-	
+
 
 	@Test
 	public void testAddAllArmies() {
