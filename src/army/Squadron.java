@@ -99,7 +99,7 @@ public class Squadron implements Army {
 		regiment.add(army);
 	}
 
-	public void addAllArmies(List<Army> listArmy) {
+	public void addAllArmies(List<? extends Army> listArmy) {
 		regiment.addAll(listArmy);
 	}
 	
@@ -107,7 +107,7 @@ public class Squadron implements Army {
 		return regiment.remove(army);
 	}
 	
-	public void removeAllArmies(Collection<Army> armies) {
+	public void removeAllArmies(Collection<? extends Army> armies) {
 		regiment.removeAll(armies);
 	}
 }
