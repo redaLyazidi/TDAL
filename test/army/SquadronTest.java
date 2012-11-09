@@ -2,6 +2,7 @@ package army;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -20,7 +21,7 @@ import soldier.ArmedUnitSoldier;
 public class SquadronTest {
 
 	private final static String[] array_soldierType = {"InfantryMan", "Horseman", "Hero"};
-	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron"};
+	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","la 7° compagnie"};
 
 	private final static int nbcannonFodder = 100;
 
@@ -60,7 +61,9 @@ public class SquadronTest {
 
 	@Test
 	public void testSquadronString() {
-		fail("Not yet implemented");
+		Squadron randomarmy = new Squadron("random");
+		assertEquals(randomarmy.getName(), "random");
+		assertNotSame(randomarmy.getName(), "Random");
 	}
 
 	@Test
@@ -133,7 +136,31 @@ public class SquadronTest {
 
 	@Test
 	public void testStrike() {
-		fail("Not yet implemented");
+		Army monkey0 = new ArmedUnitSoldier(array_soldierType[0], "monkey0");
+		Army godefroy = new ArmedUnitSoldier(array_soldierType[1], "MontMiraille");
+		int twelveMonkeys = 12;
+		float monkeysStrike = twelveMonkeys * monkey0.strike();
+		float montmirailleStrike = nbcannonFodder * godefroy.strike();
+		float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
+		float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
+		
+		Army fullarmy = new Squadron("all");
+		assertTrue(fullarmy.strike() == 0);
+		for (int i = 1; i <= twelveMonkeys; i++) 
+			monkeys.addArmy(new ArmedUnitSoldier(array_soldierType[0], "monkey"+i));
+		List<Army> horsemen = new LinkedList<Army>(); 
+		for (int i = 0; i < nbcannonFodder; i++)
+			horsemen.add(new ArmedUnitSoldier("Horseman", "MontMiraille"+i));
+		for (int i = 0; i < nbcannonFodder; i++)
+			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
+		assertTrue(monkeys.strike() == monkeysStrike);
+		Army montmirailleArmy = new Squadron("horsemen");
+		((Squadron) montmirailleArmy).addAllArmies(horsemen);
+
+		assertTrue(monkeys.strike() == monkeysStrike);
+		assertTrue(montmirailleArmy.strike() == montmirailleStrike);
+		assertTrue(rabbids.strike() ==  ravingrabbitsStrike);
+		
 	}
 
 	@Test
