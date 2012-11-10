@@ -28,14 +28,19 @@ public class SquadronTest {
 	private Squadron rabbids;
 	private Squadron norfolk;
 	private Squadron compagnie7;
-	
+	private Army montmirailleArmy;
 	private List<ArmedUnit> cannonFodder;
 	private List<Army> horsemen;
 	
 	private Army achille;
-
-
-
+	
+	private final static Army monkey0 = new ArmedUnitSoldier(array_soldierType[0], "monkey0");
+	private final static Army godefroy = new ArmedUnitSoldier(array_soldierType[1], "MontMiraille");
+	private final static float monkeysStrike = twelveMonkeys * monkey0.strike();
+	private final static float montmirailleStrike = nbcannonFodder * godefroy.strike();
+	private final static float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
+	private final static float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -48,7 +53,8 @@ public class SquadronTest {
 		rabbids = new Squadron(names[1]);
 		norfolk = new Squadron(names[2]);
 		cannonFodder = new LinkedList<ArmedUnit>();
-		compagnie7 = new Squadron(names[3]);
+		montmirailleArmy = new Squadron(names[3]);
+		compagnie7 = new Squadron(names[4]);
 		
 		horsemen = new LinkedList<Army>();
 		for (int i = 0; i < nbcannonFodder; i++) 
@@ -60,6 +66,11 @@ public class SquadronTest {
 		for (int i = 0; i < nbcannonFodder; i++)
 			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
 		
+		
+		float monkeysStrike = twelveMonkeys * monkey0.strike();
+		float montmirailleStrike = nbcannonFodder * godefroy.strike();
+		float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
+		float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
 	}
 
 
@@ -121,7 +132,7 @@ public class SquadronTest {
 		norfolk.parry(healthbefore); //they're all dead
 		assertTrue( norfolk.getHealthPoints() == 0);
 		norfolk.heal();
-		assertTrue( "OMG they're alive",norfolk.getHealthPoints() == 0);
+		assertTrue( "OMG they're alive!",norfolk.getHealthPoints() == 0);
 	}
 
 	@Test
@@ -142,12 +153,9 @@ public class SquadronTest {
 
 	@Test
 	public void testStrike() {
-		Army monkey0 = new ArmedUnitSoldier(array_soldierType[0], "monkey0");
-		Army godefroy = new ArmedUnitSoldier(array_soldierType[1], "MontMiraille");
-		float monkeysStrike = twelveMonkeys * monkey0.strike();
-		float montmirailleStrike = nbcannonFodder * godefroy.strike();
-		float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
-		float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
+		
+		
+		
 
 		assertTrue(compagnie7.strike() == 0);
 		
@@ -165,6 +173,7 @@ public class SquadronTest {
 		compagnie7.addArmy(rabbids);
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
 		compagnie7.removeAllArmies(horsemen);
+		System.out.println("J'ai glissé chef!");
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike - montmirailleStrike );
 		
 		compagnie7.addArmy(montmirailleArmy);

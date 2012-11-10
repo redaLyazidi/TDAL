@@ -4,3 +4,6 @@
 /doc/
 /*.class
 /nbproject/private/
+bin/*
+/nbproject/
+/build.xml
