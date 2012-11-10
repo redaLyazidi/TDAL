@@ -19,7 +19,7 @@ import soldier.ArmedUnitSoldier;
 public class SquadronTest {
 
 	private final static String[] array_soldierType = {"InfantryMan", "Horseman", "Hero"};
-	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","la 7° compagnie"};
+	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","La 7° compagnie"};
 
 	private final static int nbcannonFodder = 100;
 	private final static int twelveMonkeys = 12;
@@ -27,9 +27,11 @@ public class SquadronTest {
 	private Squadron monkeys;
 	private Squadron rabbids;
 	private Squadron norfolk;
-
+	private Squadron compagnie7;
+	
 	private List<ArmedUnit> cannonFodder;
-
+	private List<Army> horsemen;
+	
 	private Army achille;
 
 
@@ -46,9 +48,18 @@ public class SquadronTest {
 		rabbids = new Squadron(names[1]);
 		norfolk = new Squadron(names[2]);
 		cannonFodder = new LinkedList<ArmedUnit>();
-		for (int i = 0; i < nbcannonFodder; i++) {
+		compagnie7 = new Squadron(names[3]);
+		
+		horsemen = new LinkedList<Army>();
+		for (int i = 0; i < nbcannonFodder; i++) 
 			cannonFodder.add(new ArmedUnitSoldier(array_soldierType[0], array_soldierType[0]+String.valueOf(i)));
-		}
+		for (int i = 1; i <= twelveMonkeys; i++) 
+			monkeys.addArmy(new ArmedUnitSoldier(array_soldierType[0], "monkey"+i));
+		for (int i = 0; i < nbcannonFodder; i++)
+			horsemen.add(new ArmedUnitSoldier("Horseman", "MontMiraille"+i));
+		for (int i = 0; i < nbcannonFodder; i++)
+			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
+		
 	}
 
 
@@ -138,15 +149,8 @@ public class SquadronTest {
 		float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
 		float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
 
-		Squadron fullarmy = new Squadron("all");
-		assertTrue(fullarmy.strike() == 0);
-		for (int i = 1; i <= twelveMonkeys; i++) 
-			monkeys.addArmy(new ArmedUnitSoldier(array_soldierType[0], "monkey"+i));
-		List<Army> horsemen = new LinkedList<Army>(); 
-		for (int i = 0; i < nbcannonFodder; i++)
-			horsemen.add(new ArmedUnitSoldier("Horseman", "MontMiraille"+i));
-		for (int i = 0; i < nbcannonFodder; i++)
-			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
+		assertTrue(compagnie7.strike() == 0);
+		
 		assertTrue(monkeys.strike() == monkeysStrike);
 		
 		Army montmirailleArmy = new Squadron("horsemen");
@@ -156,12 +160,17 @@ public class SquadronTest {
 		assertTrue(montmirailleArmy.strike() == montmirailleStrike);
 		assertTrue(rabbids.strike() ==  ravingrabbitsStrike);
 		
-		fullarmy.addAllArmies(horsemen);
-		fullarmy.addArmy(monkeys);
-		fullarmy.addArmy(rabbids);
-		assertTrue(fullarmy.strike() == logicalfullarmyStrike);
-		fullarmy.removeAllArmies(horsemen);
-		assertTrue(fullarmy.strike() == logicalfullarmyStrike - montmirailleStrike );
+		compagnie7.addAllArmies(horsemen);
+		compagnie7.addArmy(monkeys);
+		compagnie7.addArmy(rabbids);
+		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
+		compagnie7.removeAllArmies(horsemen);
+		assertTrue(compagnie7.strike() == logicalfullarmyStrike - montmirailleStrike );
+		
+		compagnie7.addArmy(montmirailleArmy);
+		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
+		
+		
 
 	}
 
