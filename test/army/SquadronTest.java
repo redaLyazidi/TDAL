@@ -19,7 +19,6 @@ import soldier.SoldierType;
 
 public class SquadronTest {
 
-	private final static String[] array_soldierType = {"Infantryman", "Horseman", "Hero"};
 	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","Hussards","La 7° compagnie"};
 
 	private final static int nbcannonFodder = 100;
