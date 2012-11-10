@@ -14,8 +14,9 @@ public class Squadron implements Army {
 		this(name, new LinkedList<Army>());
 	}
 
-	public Squadron(String name, List<Army> regiment) {
-		this.regiment = regiment;
+	@SuppressWarnings("unchecked")
+	public Squadron(String name, List<? extends Army> regiment) {
+		this.regiment = (List<Army>) regiment;
 		this.name = name;
 	}
 

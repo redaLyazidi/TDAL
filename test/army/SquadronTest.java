@@ -9,8 +9,6 @@ import static org.junit.Assert.fail;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +22,8 @@ public class SquadronTest {
 	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","la 7° compagnie"};
 
 	private final static int nbcannonFodder = 100;
-
+	private final static int twelveMonkeys = 12;
+	
 	private Squadron monkeys;
 	private Squadron rabbids;
 	private Squadron norfolk;
@@ -39,9 +38,6 @@ public class SquadronTest {
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -55,9 +51,6 @@ public class SquadronTest {
 		}
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
 	public void testSquadronString() {
@@ -68,7 +61,9 @@ public class SquadronTest {
 
 	@Test
 	public void testSquadronStringListOfArmy() {
-		fail("Not yet implemented");
+		Squadron randomarmy = new Squadron("random",cannonFodder);
+		assertTrue(randomarmy.strike() == cannonFodder.get(0).strike() * nbcannonFodder);
+		assertTrue(randomarmy.getHealthPoints() == cannonFodder.get(0).getHealthPoints() * nbcannonFodder);
 	}
 
 	@Test
@@ -138,13 +133,12 @@ public class SquadronTest {
 	public void testStrike() {
 		Army monkey0 = new ArmedUnitSoldier(array_soldierType[0], "monkey0");
 		Army godefroy = new ArmedUnitSoldier(array_soldierType[1], "MontMiraille");
-		int twelveMonkeys = 12;
 		float monkeysStrike = twelveMonkeys * monkey0.strike();
 		float montmirailleStrike = nbcannonFodder * godefroy.strike();
 		float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
 		float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
-		
-		Army fullarmy = new Squadron("all");
+
+		Squadron fullarmy = new Squadron("all");
 		assertTrue(fullarmy.strike() == 0);
 		for (int i = 1; i <= twelveMonkeys; i++) 
 			monkeys.addArmy(new ArmedUnitSoldier(array_soldierType[0], "monkey"+i));
@@ -154,6 +148,7 @@ public class SquadronTest {
 		for (int i = 0; i < nbcannonFodder; i++)
 			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
 		assertTrue(monkeys.strike() == monkeysStrike);
+		
 		Army montmirailleArmy = new Squadron("horsemen");
 		((Squadron) montmirailleArmy).addAllArmies(horsemen);
 
@@ -161,6 +156,13 @@ public class SquadronTest {
 		assertTrue(montmirailleArmy.strike() == montmirailleStrike);
 		assertTrue(rabbids.strike() ==  ravingrabbitsStrike);
 		
+		fullarmy.addAllArmies(horsemen);
+		fullarmy.addArmy(monkeys);
+		fullarmy.addArmy(rabbids);
+		assertTrue(fullarmy.strike() == logicalfullarmyStrike);
+		fullarmy.removeAllArmies(horsemen);
+		assertTrue(fullarmy.strike() == logicalfullarmyStrike - montmirailleStrike );
+
 	}
 
 	@Test

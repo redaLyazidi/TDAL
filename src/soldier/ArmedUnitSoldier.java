@@ -10,7 +10,7 @@ public class ArmedUnitSoldier implements ArmedUnit {
 	protected Soldier soldier;
 	protected List<String> equipments = new ArrayList<String>();
 
- 
+
 	// External general constructor of the hierarchy of basic soldiers whose
 	// classes inherit from SoldierAbstract:
 	@SuppressWarnings("unchecked")
@@ -39,7 +39,7 @@ public class ArmedUnitSoldier implements ArmedUnit {
 				return; // decoration not applied
 			} else {
 				try { // assumption : it exists SoldierWithWeapon associated to
-						// each Weapon
+					// each Weapon
 					Class<?> c = Class.forName("weapon.SoldierWith"
 							+ equipmentType);
 					Constructor<?>[] cons = c.getConstructors();
@@ -81,6 +81,5 @@ public class ArmedUnitSoldier implements ArmedUnit {
 	public boolean parry(float force) {
 		return soldier.parry(force);
 	}
-
 
 }
