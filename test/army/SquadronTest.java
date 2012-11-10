@@ -64,10 +64,9 @@ public class SquadronTest {
 		for (int i = 1; i <= twelveMonkeys; i++) 
 			monkeys.addArmy(new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey"+i));
 		for (int i = 0; i < nbcannonFodder; i++) {
-			System.out.println(array_soldierType[1].equals(SoldierType.Horseman.toString()));
 			horsemen.add(new ArmedUnitSoldier(SoldierType.Horseman.toString(), "MontMiraille"+i));}
 		for (int i = 0; i < nbcannonFodder; i++)
-			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
+			rabbids.addArmy(new ArmedUnitSoldier(SoldierType.reverseOrdinal(i % 2).toString(), "raving rabbit"+i));
 	}
 
 
