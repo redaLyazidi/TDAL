@@ -15,10 +15,11 @@ import org.junit.Test;
 
 import soldier.ArmedUnit;
 import soldier.ArmedUnitSoldier;
+import soldier.SoldierType;
 
 public class SquadronTest {
 
-	private final static String[] array_soldierType = {"InfantryMan", "Horseman", "Hero"};
+	private final static String[] array_soldierType = {"Infantryman", "Horseman", "Hero"};
 	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","Hussards","La 7° compagnie"};
 
 	private final static int nbcannonFodder = 100;
@@ -34,7 +35,7 @@ public class SquadronTest {
 	
 	private Army achille;
 	
-	private final static Army monkey0 = new ArmedUnitSoldier(array_soldierType[0], "monkey0");
+	private final static Army monkey0 = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey0");
 	private final static Army godefroy = new ArmedUnitSoldier(array_soldierType[1], "MontMiraille");
 	private final static float monkeysStrike = twelveMonkeys * monkey0.strike();
 	private final static float montmirailleStrike = nbcannonFodder * godefroy.strike();
@@ -48,7 +49,7 @@ public class SquadronTest {
 
 	@Before
 	public void setUp() throws Exception {
-		achille = new ArmedUnitSoldier(array_soldierType[2], "Achille");
+		achille = new ArmedUnitSoldier(SoldierType.Hero.toString(), "Achille");
 		monkeys = new Squadron(names[0]);
 		rabbids = new Squadron(names[1]);
 		norfolk = new Squadron(names[2]);
@@ -57,12 +58,15 @@ public class SquadronTest {
 		compagnie7 = new Squadron(names[4]);
 		
 		horsemen = new LinkedList<Army>();
+		System.out.println(SoldierType.Infantryman.toString().equals(SoldierType.Infantryman.toString()));
 		for (int i = 0; i < nbcannonFodder; i++) 
-			cannonFodder.add(new ArmedUnitSoldier(array_soldierType[0], array_soldierType[0]+String.valueOf(i)));
+			cannonFodder.add(new ArmedUnitSoldier(/*SoldierType.Infantryman.toString()*/ SoldierType.Infantryman.toString(), SoldierType.Infantryman.toString()+String.valueOf(i)));
 		for (int i = 1; i <= twelveMonkeys; i++) 
-			monkeys.addArmy(new ArmedUnitSoldier(array_soldierType[0], "monkey"+i));
-		for (int i = 0; i < nbcannonFodder; i++)
-			horsemen.add(new ArmedUnitSoldier("Horseman", "MontMiraille"+i));
+			monkeys.addArmy(new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey"+i));
+		for (int i = 0; i < nbcannonFodder; i++) {
+			System.out.println(array_soldierType[1]);
+			System.out.println(array_soldierType[1].equals("Horseman"));
+			horsemen.add(new ArmedUnitSoldier(array_soldierType[1], "MontMiraille"+i));}
 		for (int i = 0; i < nbcannonFodder; i++)
 			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
 	}
@@ -91,7 +95,11 @@ public class SquadronTest {
 
 	@Test
 	public void testGetHealthPoints() {
-		fail("Not yet implemented");
+		Squadron random = new Squadron("random");
+		assertTrue(random.getHealthPoints() == 0);
+		ArmedUnitSoldier ryan = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "ryan");
+		random.addArmy(ryan);
+		assertTrue( ryan.getHealthPoints() == random.getHealthPoints());
 	}
 
 	@Test
