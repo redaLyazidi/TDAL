@@ -57,7 +57,6 @@ public class SquadronTest {
 		compagnie7 = new Squadron(names[4]);
 		
 		horsemen = new LinkedList<Army>();
-		System.out.println(SoldierType.Infantryman.toString().equals(SoldierType.Infantryman.toString()));
 		for (int i = 0; i < nbcannonFodder; i++) 
 			cannonFodder.add(new ArmedUnitSoldier(SoldierType.Infantryman.toString(), SoldierType.Infantryman.toString()+String.valueOf(i)));
 		for (int i = 1; i <= twelveMonkeys; i++) 
@@ -152,12 +151,7 @@ public class SquadronTest {
 
 	@Test
 	public void testStrike() {
-		
-		
-		
-
 		assertTrue(compagnie7.strike() == 0);
-		
 		assertTrue(monkeys.strike() == monkeysStrike);
 		
 		Army montmirailleArmy = new Squadron("horsemen");
@@ -170,16 +164,15 @@ public class SquadronTest {
 		compagnie7.addAllArmies(horsemen);
 		compagnie7.addArmy(monkeys);
 		compagnie7.addArmy(rabbids);
+
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
 		compagnie7.removeAllArmies(horsemen);
 		System.out.println("J'ai glissé chef!");
+		
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike - montmirailleStrike );
 		
 		compagnie7.addArmy(montmirailleArmy);
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
-		
-		
-
 	}
 
 	@Test
@@ -191,7 +184,14 @@ public class SquadronTest {
 
 	@Test
 	public void testAddAllArmies() {
-		fail("Not yet implemented");
+		Squadron random = new Squadron("random");
+		random.addAllArmies(cannonFodder);
+		Army cannonFodderWrapper = new Squadron("HumainShield", cannonFodder);
+		assertTrue( random.strike() == cannonFodderWrapper.strike());
+		assertTrue(random.getHealthPoints() == cannonFodderWrapper.getHealthPoints());
+		cannonFodderWrapper.parry(cannonFodderWrapper.getHealthPoints()/2);
+		random.parry(cannonFodderWrapper.getHealthPoints()/2);
+		assertTrue(random.getHealthPoints() == cannonFodderWrapper.getHealthPoints());
 	}
 
 	@Test
