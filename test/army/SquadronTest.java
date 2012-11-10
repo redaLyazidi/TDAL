@@ -196,7 +196,11 @@ public class SquadronTest {
 
 	@Test
 	public void testRemoveAllArmies() {
-		fail("Not yet implemented");
+		float compagnie7Strike = compagnie7.strike();
+		float compagnie7HealthPoints = compagnie7.getHealthPoints();
+		compagnie7.removeAllArmies(horsemen);
+		assertTrue(compagnie7.strike() + montmirailleArmy.strike() == compagnie7Strike);
+		assertTrue(compagnie7.getHealthPoints() + montmirailleArmy.getHealthPoints() == compagnie7HealthPoints);
 	}
 
 }
