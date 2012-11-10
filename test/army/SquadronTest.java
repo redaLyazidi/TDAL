@@ -60,12 +60,10 @@ public class SquadronTest {
 		horsemen = new LinkedList<Army>();
 		System.out.println(SoldierType.Infantryman.toString().equals(SoldierType.Infantryman.toString()));
 		for (int i = 0; i < nbcannonFodder; i++) 
-			cannonFodder.add(new ArmedUnitSoldier(/*SoldierType.Infantryman.toString()*/ SoldierType.Infantryman.toString(), SoldierType.Infantryman.toString()+String.valueOf(i)));
+			cannonFodder.add(new ArmedUnitSoldier(SoldierType.Infantryman.toString(), SoldierType.Infantryman.toString()+String.valueOf(i)));
 		for (int i = 1; i <= twelveMonkeys; i++) 
 			monkeys.addArmy(new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey"+i));
 		for (int i = 0; i < nbcannonFodder; i++) {
-			System.out.println(array_soldierType[1]);
-			System.out.println(array_soldierType[1].equals("Horseman"));
 			horsemen.add(new ArmedUnitSoldier(array_soldierType[1], "MontMiraille"+i));}
 		for (int i = 0; i < nbcannonFodder; i++)
 			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
