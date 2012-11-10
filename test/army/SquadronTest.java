@@ -36,7 +36,7 @@ public class SquadronTest {
 	private Army achille;
 	
 	private final static Army monkey0 = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey0");
-	private final static Army godefroy = new ArmedUnitSoldier(array_soldierType[1], "MontMiraille");
+	private final static Army godefroy = new ArmedUnitSoldier(SoldierType.Horseman.toString(), "MontMiraille");
 	private final static float monkeysStrike = twelveMonkeys * monkey0.strike();
 	private final static float montmirailleStrike = nbcannonFodder * godefroy.strike();
 	private final static float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
