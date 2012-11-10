@@ -19,7 +19,7 @@ import soldier.ArmedUnitSoldier;
 public class SquadronTest {
 
 	private final static String[] array_soldierType = {"InfantryMan", "Horseman", "Hero"};
-	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","La 7° compagnie"};
+	private final static String[] names = {"12 monkeys","Raving Rabbids","Norfolk Squadron","Hussards","La 7° compagnie"};
 
 	private final static int nbcannonFodder = 100;
 	private final static int twelveMonkeys = 12;
@@ -28,7 +28,7 @@ public class SquadronTest {
 	private Squadron rabbids;
 	private Squadron norfolk;
 	private Squadron compagnie7;
-	private Army montmirailleArmy;
+	private Squadron montmirailleArmy;
 	private List<ArmedUnit> cannonFodder;
 	private List<Army> horsemen;
 	
@@ -65,12 +65,6 @@ public class SquadronTest {
 			horsemen.add(new ArmedUnitSoldier("Horseman", "MontMiraille"+i));
 		for (int i = 0; i < nbcannonFodder; i++)
 			rabbids.addArmy(new ArmedUnitSoldier(array_soldierType[i % 2], "raving rabbit"+i));
-		
-		
-		float monkeysStrike = twelveMonkeys * monkey0.strike();
-		float montmirailleStrike = nbcannonFodder * godefroy.strike();
-		float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
-		float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
 	}
 
 
