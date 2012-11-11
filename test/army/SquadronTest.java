@@ -145,11 +145,12 @@ public class SquadronTest {
 
 	@Test
 	public void testParry() {
-		Sword sword = new Sword();
-		ArmedUnitSoldier s = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "s");
-		float unarmedsStrike = s.strike();
-		s.addEquipment(WeaponType.Sword.toString());
-		assertTrue( unarmedsStrike  + sword.getStrikeValue() == s.strike());
+		montmirailleArmy.addAllArmies(horsemen);
+		float fullHealth = montmirailleArmy.getHealthPoints();
+		float force = 100;
+		assertTrue(godefroy.parry(force) == montmirailleArmy.parry(force));
+		godefroy.heal();
+		assertTrue(montmirailleArmy.getHealthPoints() + force == fullHealth);
 	}
 
 	@Test
