@@ -3,7 +3,7 @@ package weapon;
 public class Deathnote extends WeaponAbstract {
 	private static final float DEFENSE = 0;
 	private static final float ATTACK = Float.MAX_VALUE;
-	private static final float RESISTANCE = 0;
+	private static final float RESISTANCE = 1;
 
 	public Deathnote() {
 		super(DEFENSE, ATTACK, RESISTANCE);
@@ -12,5 +12,8 @@ public class Deathnote extends WeaponAbstract {
 	public void fix() {
 		resistance = RESISTANCE;
 	}
+	
+	@Override
+	public void damageCompute(float coef) {} //Impossible to break
 
 }

@@ -15,7 +15,10 @@ import org.junit.Test;
 
 import soldier.ArmedUnit;
 import soldier.ArmedUnitSoldier;
+import soldier.Infantryman;
 import soldier.SoldierType;
+import weapon.Sword;
+import weapon.WeaponType;
 
 public class SquadronTest {
 
@@ -142,7 +145,11 @@ public class SquadronTest {
 
 	@Test
 	public void testParry() {
-		fail("Not yet implemented");
+		Sword sword = new Sword();
+		ArmedUnitSoldier s = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "s");
+		float unarmedsStrike = s.strike();
+		s.addEquipment(WeaponType.Sword.toString());
+		assertTrue( unarmedsStrike  + sword.getStrikeValue() == s.strike());
 	}
 
 	@Test
@@ -174,8 +181,17 @@ public class SquadronTest {
 	@Test
 	public void testAddEquipment() {
 		Squadron random = new Squadron("random");
-		random.addEquipment("Sword");
+		random.addEquipment(WeaponType.Sword.toString());
 		assertTrue(random.strike() == 0);
+		System.out.println(monkey0.strike());
+		monkey0.addEquipment(WeaponType.Sword.toString());
+		System.out.println(monkey0.strike());
+		monkey0.addEquipment(WeaponType.Sword.toString());
+		System.out.println(monkey0.strike());
+//		monkey0.addEquipment(WeaponType.AK47.toString());
+		monkey0.addEquipment(WeaponType.Deathnote.toString());
+		System.out.println(monkey0.strike());
+		
 		
 		
 	}
