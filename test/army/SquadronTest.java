@@ -151,6 +151,8 @@ public class SquadronTest {
 		assertTrue(godefroy.parry(force) == montmirailleArmy.parry(force));
 		godefroy.heal();
 		assertTrue(montmirailleArmy.getHealthPoints() + force == fullHealth);
+		for (Army a : horsemen) 
+			assertTrue( a.getHealthPoints() == godefroy.getHealthPoints() - force/nbcannonFodder);
 	}
 
 	@Test
