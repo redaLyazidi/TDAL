@@ -26,7 +26,7 @@ public class SquadronTest {
 
 	private final static int nbcannonFodder = 100;
 	private final static int twelveMonkeys = 12;
-	
+
 	private Squadron monkeys;
 	private Squadron rabbids;
 	private Squadron norfolk;
@@ -34,16 +34,16 @@ public class SquadronTest {
 	private Squadron montmirailleArmy;
 	private List<ArmedUnit> cannonFodder;
 	private List<Army> horsemen;
-	
+
 	private Army achille;
-	
+
 	private final static Army monkey0 = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey0");
 	private final static Army godefroy = new ArmedUnitSoldier(SoldierType.Horseman.toString(), "MontMiraille");
 	private final static float monkeysStrike = twelveMonkeys * monkey0.strike();
 	private final static float montmirailleStrike = nbcannonFodder * godefroy.strike();
 	private final static float ravingrabbitsStrike = 50 * ( godefroy.strike() + monkey0.strike());
 	private final static float logicalfullarmyStrike = monkeysStrike + montmirailleStrike + ravingrabbitsStrike;
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -58,7 +58,7 @@ public class SquadronTest {
 		cannonFodder = new LinkedList<ArmedUnit>();
 		montmirailleArmy = new Squadron(names[3]);
 		compagnie7 = new Squadron(names[4]);
-		
+
 		horsemen = new LinkedList<Army>();
 		for (int i = 0; i < nbcannonFodder; i++) 
 			cannonFodder.add(new ArmedUnitSoldier(SoldierType.Infantryman.toString(), SoldierType.Infantryman.toString()+String.valueOf(i)));
@@ -156,14 +156,14 @@ public class SquadronTest {
 	public void testStrike() {
 		assertTrue(compagnie7.strike() == 0);
 		assertTrue(monkeys.strike() == monkeysStrike);
-		
+
 		Army montmirailleArmy = new Squadron("horsemen");
 		((Squadron) montmirailleArmy).addAllArmies(horsemen);
 
 		assertTrue(monkeys.strike() == monkeysStrike);
 		assertTrue(montmirailleArmy.strike() == montmirailleStrike);
 		assertTrue(rabbids.strike() ==  ravingrabbitsStrike);
-		
+
 		compagnie7.addAllArmies(horsemen);
 		compagnie7.addArmy(monkeys);
 		compagnie7.addArmy(rabbids);
@@ -171,9 +171,9 @@ public class SquadronTest {
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
 		compagnie7.removeAllArmies(horsemen);
 		System.out.println("J'ai glissé chef!");
-		
+
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike - montmirailleStrike );
-		
+
 		compagnie7.addArmy(montmirailleArmy);
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
 	}
@@ -181,21 +181,15 @@ public class SquadronTest {
 	@Test
 	public void testAddEquipment() {
 		Squadron random = new Squadron("random");
-		Sword sword = new Sword();
 		random.addEquipment(WeaponType.Sword.toString());
 		assertTrue(random.strike() == 0);
-		float monkeystrike = monkey0.strike();
-		monkey0.addEquipment(WeaponType.Sword.toString());
-		random.addArmy(monkey0);
-		assertTrue(random.strike() == monkey0.strike());
-		
-		monkey0.addEquipment(WeaponType.Sword.toString());
-		System.out.println(monkey0.strike());
-		monkey0.addEquipment(WeaponType.AK47.toString());
-//		assertTrue(monkey0.strike() );
-		
-		
-		
+
+		montmirailleArmy.addAllArmies(horsemen);
+		montmirailleArmy.addEquipment(WeaponType.Lightsaber.toString());
+		ArmedUnitSoldier jediknight = new ArmedUnitSoldier(SoldierType.Horseman.toString(), "Obi-Wan");
+		jediknight.addEquipment(WeaponType.Lightsaber.toString());
+
+		assertTrue(montmirailleArmy.strike() == jediknight.strike() * nbcannonFodder);
 	}
 
 
