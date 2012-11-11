@@ -110,10 +110,6 @@ public class SquadronTest {
 		assertFalse(norfolk.alive());
 	}
 
-	private void hardtraining(Squadron s) {
-		while(s.alive())
-			s.parry(s.strike());
-	}
 
 	@Test
 	public void testHeal() { // add and remove also tested
@@ -177,7 +173,11 @@ public class SquadronTest {
 
 	@Test
 	public void testAddEquipment() {
-		fail("Not yet implemented");
+		Squadron random = new Squadron("random");
+		random.addEquipment("Sword");
+		assertTrue(random.strike() == 0);
+		
+		
 	}
 
 
