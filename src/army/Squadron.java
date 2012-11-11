@@ -96,12 +96,14 @@ public class Squadron implements Army {
 			a.addEquipment(weaponType);
 	}
 
-	public void addArmy(Army army) {
-		regiment.add(army);
+	public void addArmy(Army army) { //Impossible to add itself
+		if(!equals(army))	
+			regiment.add(army);
 	}
 
-	public void addAllArmies(List<? extends Army> listArmy) {
-		regiment.addAll(listArmy);
+	public void addAllArmies(Collection<? extends Army> listArmy) {
+		for (Army a : listArmy)
+			addArmy(a);
 	}
 	
 	public boolean removeArmy(Army army) {

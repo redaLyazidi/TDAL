@@ -181,16 +181,18 @@ public class SquadronTest {
 	@Test
 	public void testAddEquipment() {
 		Squadron random = new Squadron("random");
+		Sword sword = new Sword();
 		random.addEquipment(WeaponType.Sword.toString());
 		assertTrue(random.strike() == 0);
-		System.out.println(monkey0.strike());
+		float monkeystrike = monkey0.strike();
+		monkey0.addEquipment(WeaponType.Sword.toString());
+		random.addArmy(monkey0);
+		assertTrue(random.strike() == monkey0.strike());
+		
 		monkey0.addEquipment(WeaponType.Sword.toString());
 		System.out.println(monkey0.strike());
-		monkey0.addEquipment(WeaponType.Sword.toString());
-		System.out.println(monkey0.strike());
-//		monkey0.addEquipment(WeaponType.AK47.toString());
-		monkey0.addEquipment(WeaponType.Deathnote.toString());
-		System.out.println(monkey0.strike());
+		monkey0.addEquipment(WeaponType.AK47.toString());
+//		assertTrue(monkey0.strike() );
 		
 		
 		

@@ -13,7 +13,5 @@ public class Deathnote extends WeaponAbstract {
 		resistance = RESISTANCE;
 	}
 	
-	@Override
-	public void damageCompute(float coef) {} //Impossible to break
 
 }
