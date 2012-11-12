@@ -1,6 +1,6 @@
 package weapon;
 
-abstract class WeaponAbstract implements Weapon {
+public abstract class WeaponAbstract implements Weapon {
 	protected float defense;
 	protected float attack;
 	protected float resistance; // multiplicative coef for weapon resistance to

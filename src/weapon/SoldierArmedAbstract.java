@@ -2,12 +2,12 @@ package weapon;
 
 import soldier.Soldier;
 
-public abstract class SoldierArmed<W extends Weapon> implements Soldier {
+public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier {
 	protected Soldier soldier;
 	protected W weapon;
 	private static final float WEARINESS_COEF = 0; // XXX temporarily inhibited
 
-	public SoldierArmed(Soldier s, W a) {
+	public SoldierArmedAbstract(Soldier s, W a) {
 		soldier = s;
 		weapon = a;
 	}
@@ -57,7 +57,7 @@ public abstract class SoldierArmed<W extends Weapon> implements Soldier {
 	
 	@SuppressWarnings("unchecked")
 	public int soldiercmp(Soldier s) {
-		float statS = ((SoldierArmed<W>) s).averageStats();
+		float statS = ((SoldierArmedAbstract<W>) s).averageStats();
 		float statThis = this.averageStats();
 		if(statThis > statS)
 			return 1;

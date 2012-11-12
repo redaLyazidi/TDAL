@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import soldier.ArmedUnit;
-import soldier.ArmedUnitSoldier;
-import soldier.UnknownSoldierTypeException;
+import soldier.impl.ArmedUnitSoldier;
+import soldier.impl.UnknownSoldierTypeException;
 
 public class TestUnitSoldier {
 	ArmedUnit sf, sc;

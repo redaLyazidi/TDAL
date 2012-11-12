@@ -1,6 +1,6 @@
 package soldier;
 
-abstract class SoldierAbstract implements Soldier {
+public abstract class SoldierAbstract implements Soldier {
 	protected String name;
 	protected float healthPoints;
 	protected float force;
