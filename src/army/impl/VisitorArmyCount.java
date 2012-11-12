@@ -21,21 +21,24 @@ public class VisitorArmyCount implements VisitorArmy
 	@Override
 	public void visit(Army squadron)
 	{
-		
+		squadron.accept(this);
 	}
 
 	@Override
 	public void visit(Soldier soldier) 
 	{
-		this.units.put(SoldierType.valueOf(soldier.getClass().getName()),
-				this.units.get(soldier.getClass().toString()));
-		System.out.println("HERE WE HAVE : " + this.units.get(soldier.getClass().getName()));
+		for (SoldierType type : SoldierType.values())
+			if (soldier.getClass().getName().equals(type))
+				this.units.put(SoldierType.valueOf(soldier.getClass().getName()),
+						this.units.get(soldier.getClass().toString()) + 1);
 	}
 
 	@Override
 	public int getCount(SoldierType type)
 	{
-		return this.units.get(type);
+		if (this.units.containsKey(type))
+			return this.units.get(type);
+		return 0;
 	}
 
 }

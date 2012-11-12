@@ -1,5 +1,7 @@
 package soldier;
 
+import army.VisitorArmy;
+
 public abstract class SoldierAbstract implements Soldier {
 	protected String name;
 	protected float healthPoints;
@@ -38,4 +40,7 @@ public abstract class SoldierAbstract implements Soldier {
 		if( alive())
 			this.healthPoints = healthPoints;
 	}
+	
+	public abstract void accept(VisitorArmy visitor);
+	
 }

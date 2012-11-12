@@ -1,6 +1,10 @@
 package soldier;
 
-public interface Soldier {
+import army.VisitorArmy;
+
+public interface Soldier 
+{
+
 	public String getName();
 
 	public float getHealthPoints();
@@ -15,4 +19,6 @@ public interface Soldier {
 
 	public float strike();
 
+	public void accept(VisitorArmy visitor);
+	
 }

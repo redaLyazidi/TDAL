@@ -1,5 +1,6 @@
 package weapon;
 
+import army.VisitorArmy;
 import soldier.Soldier;
 
 public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier {
@@ -67,4 +68,7 @@ public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier 
 		else 
 			return -1;
 	}
+	
+	public abstract void accept(VisitorArmy visitor);
+	
 }

@@ -1,7 +1,7 @@
 package soldier.impl;
 
 import soldier.SoldierAbstract;
-import army.ArmyVisitor;
+import army.VisitorArmy;
 
 public class Hero extends SoldierAbstract {
 
@@ -25,7 +25,7 @@ public class Hero extends SoldierAbstract {
 		return super.parry(force);
 	}
 	
-	public void accept(ArmyVisitor visitor)
+	public void accept(VisitorArmy visitor)
 	{
 		visitor.visit(this);
 	}

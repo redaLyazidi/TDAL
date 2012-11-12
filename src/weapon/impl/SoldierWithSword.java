@@ -2,7 +2,7 @@ package weapon.impl;
 
 import soldier.Soldier;
 import weapon.SoldierArmedAbstract;
-import army.ArmyVisitor;
+import army.VisitorArmy;
 
 public class SoldierWithSword extends SoldierArmedAbstract<Sword> {
 
@@ -10,7 +10,7 @@ public class SoldierWithSword extends SoldierArmedAbstract<Sword> {
 		super(s, new Sword());
 	}
 	
-	public void accept(ArmyVisitor visitor)
+	public void accept(VisitorArmy visitor)
 	{
 		visitor.visit(this);
 	}

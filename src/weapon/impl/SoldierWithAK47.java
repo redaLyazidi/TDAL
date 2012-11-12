@@ -1,11 +1,18 @@
 package weapon.impl;
 
 import soldier.Soldier;
-import weapon.SoldierArmed;
+import weapon.SoldierArmedAbstract;
+import army.VisitorArmy;
 
-public class SoldierWithAK47 extends SoldierArmed<AK47> {
+public class SoldierWithAK47 extends SoldierArmedAbstract<AK47> {
 
 	public SoldierWithAK47(Soldier s) {
 		super(s, new AK47());
 	}
+	
+	public void accept(VisitorArmy visitor)
+	{
+		visitor.visit(this.soldier);
+	}
+	
 }

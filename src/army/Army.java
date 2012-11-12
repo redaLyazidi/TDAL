@@ -1,7 +1,8 @@
 package army;
 
+public interface Army 
+{
 
-public interface Army {
 	public String getName();
 
 	public float getHealthPoints();
@@ -17,4 +18,7 @@ public interface Army {
 	public void infuse_life();
 	// the only new method compared to Soldier
 	public void addEquipment(String weaponType); 
+	
+	public void accept(VisitorArmy visitor);
+	
 }

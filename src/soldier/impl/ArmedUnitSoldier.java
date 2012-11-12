@@ -8,7 +8,7 @@ import soldier.ArmedUnit;
 import soldier.Soldier;
 import soldier.SoldierAbstract;
 import weapon.SoldierArmedAbstract;
-import army.ArmyVisitor;
+import army.VisitorArmy;
 
 public class ArmedUnitSoldier implements ArmedUnit {
 	protected Soldier soldier;
@@ -22,7 +22,7 @@ public class ArmedUnitSoldier implements ArmedUnit {
 		try {
 			// ensures that the initial soldier is an undecorated one
 			Class<? extends SoldierAbstract> c;
-			c = (Class<? extends SoldierAbstract>) Class.forName("soldier."
+			c = (Class<? extends SoldierAbstract>) Class.forName("soldier.impl."
 					+ soldierType);
 
 			Constructor<? extends SoldierAbstract>[] make;
@@ -44,7 +44,7 @@ public class ArmedUnitSoldier implements ArmedUnit {
 			} else {
 				try { // assumption : it exists SoldierWithWeapon associated to
 					// each Weapon
-					Class<?> c = Class.forName("weapon.SoldierWith"
+					Class<?> c = Class.forName("weapon.impl.SoldierWith"
 							+ equipmentType);
 					Constructor<?>[] cons = c.getConstructors();
 					Object[] argc = { soldier };
@@ -86,9 +86,9 @@ public class ArmedUnitSoldier implements ArmedUnit {
 		return soldier.parry(force);
 	}
 	
-	public void accept(ArmyVisitor visitor)
+	public void accept(VisitorArmy visitor)
 	{
-		visitor.visit(this);
+		visitor.visit(this.soldier);
 	}
 
 }

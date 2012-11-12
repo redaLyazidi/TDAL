@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import army.Army;
-import army.ArmyVisitor;
+import army.VisitorArmy;
 
 public class Squadron implements Army {
 
@@ -98,7 +98,7 @@ public class Squadron implements Army {
 		for (Army a : regiment)
 			a.addEquipment(weaponType);
 	}
-
+	
 	public void addArmy(Army army) { //Impossible to add itself
 		if(!equals(army))	
 			regiment.add(army);
@@ -117,9 +117,10 @@ public class Squadron implements Army {
 		regiment.removeAll(armies);
 	}
 
-	public void accept(ArmyVisitor visitor)
+	public void accept(VisitorArmy visitor)
 	{
-		visitor.visit(this);
+		for (Army a : this.regiment)
+			visitor.visit(a);
 	}
 
 }

@@ -1,7 +1,7 @@
 package soldier.impl;
 
+import army.VisitorArmy;
 import soldier.SoldierAbstract;
-import army.ArmyVisitor;
 
 public class Infantryman extends SoldierAbstract {
 	private static final int FORCE = 15;
@@ -19,7 +19,7 @@ public class Infantryman extends SoldierAbstract {
 		heal_inter(HEALTHPOINTS);
 	}
 	
-	public void accept(ArmyVisitor visitor)
+	public void accept(VisitorArmy visitor)
 	{
 		visitor.visit(this);
 	}
