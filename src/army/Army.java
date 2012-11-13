@@ -19,6 +19,6 @@ public interface Army
 	// the only new method compared to Soldier
 	public void addEquipment(String weaponType); 
 	
-	public void accept(VisitorArmy visitor);
+	public <T> T accept(VisitorArmy<T> visitor);
 	
 }

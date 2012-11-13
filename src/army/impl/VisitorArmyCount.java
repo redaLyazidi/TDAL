@@ -1,44 +1,69 @@
 package army.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import soldier.ArmedUnit;
 import soldier.Soldier;
-import soldier.SoldierType;
+import soldier.impl.Hero;
+import soldier.impl.Horseman;
+import soldier.impl.Infantryman;
 import army.Army;
 import army.VisitorArmy;
 
-public class VisitorArmyCount implements VisitorArmy
+public class VisitorArmyCount implements VisitorArmy<Integer>
 {
 
-	protected Map<SoldierType, Integer> units = null;
-	
-	public VisitorArmyCount()
+	@Override 
+	public Integer visit(Army army)
 	{
-		this.units = new HashMap<SoldierType, Integer>();
-	}
-	
-	@Override
-	public void visit(Army squadron)
-	{
-		squadron.accept(this);
+		return army.accept(this);
 	}
 
 	@Override
-	public void visit(Soldier soldier) 
+	public Integer visit(Squadron squadron) {
+		int count = 0;
+		for( Army a: squadron.getRegiment())
+			count += a.accept(this);
+		return count;
+	}
+	
+	@Override
+	public Integer visit(ArmedUnit soldier) 
 	{
-		for (SoldierType type : SoldierType.values())
-			if (soldier.getClass().getName().equals(type))
-				this.units.put(SoldierType.valueOf(soldier.getClass().getName()),
-						this.units.get(soldier.getClass().toString()) + 1);
+		return soldier.accept(this);
+	}
+
+
+	public Integer visit(Soldier soldier)
+	{
+		return 1;
 	}
 
 	@Override
-	public int getCount(SoldierType type)
-	{
-		if (this.units.containsKey(type))
-			return this.units.get(type);
-		return 0;
+	public Integer visit(Horseman horseman) {
+		return 1;
 	}
+	
+	
+	@Override
+	public Integer visit(Infantryman infantryman) {
+		return 1;
+	}
+	
+	@Override
+	public Integer visit(Hero hero) {
+		return 1;
+	}
+
+	/*public int getCount(String soldiertype ) {
+		int count =0;
+		try{
+			count = getCount(SoldierType.valueOf(soldiertype));
+			return count;
+			}
+		catch( IllegalArgumentException iae){
+			throw new UnknownSoldierTypeException("Unknown soldier type"
+					+ iae.toString());
+		}
+	}*/
+
 
 }

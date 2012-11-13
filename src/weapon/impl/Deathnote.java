@@ -11,6 +11,10 @@ public class Deathnote extends WeaponAbstract {
 		super(DEFENSE, ATTACK, RESISTANCE);
 	}
 
+	@Override
+	public float getStrikeValue() {
+		return attack;
+	}
 	public void fix() {
 		resistance = RESISTANCE;
 	}

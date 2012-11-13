@@ -116,11 +116,14 @@ public class Squadron implements Army {
 	public void removeAllArmies(Collection<? extends Army> armies) {
 		regiment.removeAll(armies);
 	}
+	
+	public List<Army> getRegiment() {
+		return regiment;
+	}
 
-	public void accept(VisitorArmy visitor)
+	public <T> T accept(VisitorArmy<T> visitor)
 	{
-		for (Army a : this.regiment)
-			visitor.visit(a);
+		return visitor.visit(this);
 	}
 
 }

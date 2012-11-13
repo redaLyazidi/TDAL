@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,11 +13,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import soldier.ArmedUnit;
-import soldier.ArmedUnitSoldier;
-import soldier.Infantryman;
 import soldier.SoldierType;
-import weapon.Sword;
+import soldier.impl.ArmedUnitSoldier;
 import weapon.WeaponType;
+import army.impl.Squadron;
 
 public class SquadronTest {
 
