@@ -9,9 +9,9 @@ import army.impl.Squadron;
 
 public interface VisitorArmy<T>
 {
-	public T visit(Army squadron);
-	public T visit(ArmedUnit soldier);
+	public T visit(Army army);
 	public T visit(Squadron squadron);
+	public T visit(ArmedUnit soldier);
 	public T visit(Soldier soldier);
 	public T visit(Horseman horseman);
 	public T visit(Infantryman infantryman);

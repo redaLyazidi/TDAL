@@ -53,17 +53,4 @@ public class VisitorArmyCount implements VisitorArmy<Integer>
 		return 1;
 	}
 
-	/*public int getCount(String soldiertype ) {
-		int count =0;
-		try{
-			count = getCount(SoldierType.valueOf(soldiertype));
-			return count;
-			}
-		catch( IllegalArgumentException iae){
-			throw new UnknownSoldierTypeException("Unknown soldier type"
-					+ iae.toString());
-		}
-	}*/
-
-
 }
