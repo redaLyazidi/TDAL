@@ -14,7 +14,7 @@ import builder.BuilderType;
 import builder.StatementBuilder;
 import builder.UnknownBuilderType;
 
-public class VisitorArmyStatementString implements VisitorArmy<Void> {
+public class VisitorArmyStatement implements VisitorArmy<Void> {
 
 	private final static String title = "Army:";
 
@@ -22,11 +22,11 @@ public class VisitorArmyStatementString implements VisitorArmy<Void> {
 	private StatementBuilder statement;
 	private int nbtab;
 
-	public VisitorArmyStatementString() {
+	public VisitorArmyStatement() {
 		this(BuilderType.String); 
 	}
 
-	public VisitorArmyStatementString(String buildertype) {
+	public VisitorArmyStatement(String buildertype) {
 		try {
 			statement = BuilderType.valueOf(buildertype).getBuilder();
 			statement.setTitle(title);
@@ -36,7 +36,7 @@ public class VisitorArmyStatementString implements VisitorArmy<Void> {
 		}
 	}
 
-	public VisitorArmyStatementString(BuilderType buildertype) {
+	public VisitorArmyStatement(BuilderType buildertype) {
 		statement = buildertype.getBuilder();
 		statement.setTitle(title);
 		nbtab = 0;
