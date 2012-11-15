@@ -86,9 +86,14 @@ public class ArmedUnitSoldier implements ArmedUnit {
 		return soldier.parry(force);
 	}
 	
-	public <T> T accept(VisitorArmy<T> visitor)
-	{
-		return visitor.visit(this);
+	public List<String> getEquipmentsLabel() {
+		return equipments;
+	}
+	
+	public <T> T accept(VisitorArmy<T> visitor) {
+		System.out.println("Coucou on est là");
+		System.out.println(soldier.getName());
+		return visitor.visit(soldier);
 	}
 
 }

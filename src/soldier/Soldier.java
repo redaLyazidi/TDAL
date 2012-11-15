@@ -19,6 +19,6 @@ public interface Soldier
 
 	public float strike();
 
-	public void accept(VisitorArmy visitor);
+	public <T> T accept(VisitorArmy<T> visitor);
 	
 }

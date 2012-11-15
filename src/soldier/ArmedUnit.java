@@ -1,6 +1,7 @@
 package soldier;
 
 import army.Army;
+import army.VisitorArmy;
 
 public interface ArmedUnit extends Army{
 	public String getName();
@@ -20,4 +21,7 @@ public interface ArmedUnit extends Army{
 	public void infuse_life();
 	// the only new method compared to Soldier
 	public void addEquipment(String weaponType); 
+	
+	@Override
+	public <T> T accept(VisitorArmy<T> visitor);
 }

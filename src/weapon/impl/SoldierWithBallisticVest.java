@@ -10,9 +10,9 @@ public class SoldierWithBallisticVest extends SoldierArmedAbstract<BallisticVest
 		super(s, new BallisticVest());
 	}
 	
-	public void accept(VisitorArmy visitor)
+	public <T> T accept(VisitorArmy<T> visitor)
 	{
-		visitor.visit(this.soldier);
+		return visitor.visit(this.soldier);
 	}
 	
 }

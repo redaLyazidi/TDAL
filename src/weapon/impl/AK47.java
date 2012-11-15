@@ -16,4 +16,6 @@ public class AK47 extends WeaponAbstract {
 	public void fix() {
 		resistance = RESISTANCE;
 	}
+	
+
 }

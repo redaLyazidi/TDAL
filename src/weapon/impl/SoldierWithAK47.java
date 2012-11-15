@@ -10,9 +10,9 @@ public class SoldierWithAK47 extends SoldierArmedAbstract<AK47> {
 		super(s, new AK47());
 	}
 	
-	public void accept(VisitorArmy visitor)
+	public <T> T accept(VisitorArmy<T> visitor)
 	{
-		visitor.visit(this.soldier);
+		return visitor.visit(this.soldier);
 	}
 	
 }

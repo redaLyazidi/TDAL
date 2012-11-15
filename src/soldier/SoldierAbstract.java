@@ -41,6 +41,10 @@ public abstract class SoldierAbstract implements Soldier {
 			this.healthPoints = healthPoints;
 	}
 	
-	public abstract void accept(VisitorArmy visitor);
+	public  <T> T accept(VisitorArmy<T> visitor) {
+		System.out.println("coucou");
+		return null;
+	}
+	
 	
 }

@@ -1,42 +1,48 @@
 package builder;
 
-public class BuilderString implements StatementBuilder {
-	private String _statement = "";
+public class BuilderString extends AbstractBuilder {
 
-	public void reset() {
-		_statement = "";
-	}
-
+	@Override
 	public void setTitle(String s) {
-		_statement += s + "\n";
+		addLine(s);
 	}
 
+	@Override
 	public void beginParagraph(String s) {
-		_statement += "\n" + s;
+		addLineFeed();
+		statement.append(s);
 	}
 
+	@Override
 	public void beginParagraph() {
-		_statement += "\n";
+		addLineFeed();
 	}
 
 	public void endParagraph() {
-		_statement += "\n";
+		addLineFeed();
 	}
 
+	@Override
 	public void setTabulation() {
-		_statement += "\t";
+		statement.append('\t');
 	}
-
+	
+	@Override
 	public void addLine(String s) {
-		_statement += s + "\n";
+		statement.append(s);
+		addLineFeed();
 	}
 
+	@Override
 	public void addStatement(String s) {
-		_statement += s;
+		statement.append(s);
 	}
 
-	public String getStatement() {
-		return _statement;
+	@Override
+	public void addLineFeed() {
+		statement.append('\n');
 	}
+
+	
 
 }

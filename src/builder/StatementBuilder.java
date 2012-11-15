@@ -17,5 +17,7 @@ public interface StatementBuilder {
 	public void addLine(String s);
 
 	public void addStatement(String s);
+	
+	public void addLineFeed();
 
 }

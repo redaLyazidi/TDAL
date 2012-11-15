@@ -69,6 +69,6 @@ public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier 
 			return -1;
 	}
 	
-	public abstract void accept(VisitorArmy visitor);
+	public abstract <T> T accept(VisitorArmy<T> visitor);
 	
 }

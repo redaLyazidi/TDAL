@@ -24,16 +24,14 @@ public class VisitorArmyCount implements VisitorArmy<Integer>
 			count += a.accept(this);
 		return count;
 	}
-	
+
 	@Override
-	public Integer visit(ArmedUnit soldier) 
-	{
+	public Integer visit(ArmedUnit soldier) {
 		return soldier.accept(this);
 	}
 
 
-	public Integer visit(Soldier soldier)
-	{
+	public Integer visit(Soldier soldier) {
 		return 1;
 	}
 
@@ -41,13 +39,13 @@ public class VisitorArmyCount implements VisitorArmy<Integer>
 	public Integer visit(Horseman horseman) {
 		return 1;
 	}
-	
-	
+
+
 	@Override
 	public Integer visit(Infantryman infantryman) {
 		return 1;
 	}
-	
+
 	@Override
 	public Integer visit(Hero hero) {
 		return 1;

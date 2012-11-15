@@ -1,52 +1,58 @@
 package builder;
 import java.io.*;
 
-public class HtmlBuilder implements StatementBuilder {
-	private String _statement = "";
+public class HtmlBuilder extends AbstractBuilder {
 	
 	private final static int nbspacesForTabulation = 4; //common value
 	
-	public void reset() {
-		_statement = "";
-	}
-
+	@Override
 	public void setTitle(String s) {
-		_statement += "<h1>" + s + "</h1>";
+		statement.append("<h1>" + s + "</h1>\n");
 	}
 
+	@Override
 	public void beginParagraph(String s) {
-		_statement += "<p>" + s;
+		beginParagraph();
+		statement.append(s);
+		
 	}
 
+	@Override
 	public void beginParagraph() {
-		_statement += "<p>";
+		statement.append("<p> ");
 	}
 
+	@Override
 	public void endParagraph() {
-		_statement += "</p>";
+		statement.append("</p>\n");
 	}
 
+	@Override
 	public void setTabulation() {
 		for (int i = 0; i < nbspacesForTabulation; i++)
-			_statement += "&nbsp";
+			statement.append("&nbsp");
 	}
 
+	@Override
 	public void addLine(String s) {
-		_statement += s + "<br>\n";
+		addStatement(s);
+		statement.append(" <br>\n");
 	}
 
+	@Override
 	public void addStatement(String s) {
-		_statement += s;
-	}
-
-	public String getHtmlStatement() {
-		return _statement;
+		statement.append(s);
 	}
 
 	public void printHtmlStatement(FileOutputStream out) {		  
 		PrintStream p = new PrintStream(out);
-		p.println(_statement);
+		p.println(statement.toString());
 		p.close();	
+	}
+
+	@Override
+	public void addLineFeed() {
+		statement.append("<br/>\n");
 	}
 
 }

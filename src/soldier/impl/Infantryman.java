@@ -19,9 +19,10 @@ public class Infantryman extends SoldierAbstract {
 		heal_inter(HEALTHPOINTS);
 	}
 	
-	public void accept(VisitorArmy visitor)
+	public <T> T accept(VisitorArmy<T> visitor)
 	{
-		visitor.visit(this);
+		System.out.println("Coucou on est là aussi");
+		return visitor.visit(this);
 	}
 	
 }
