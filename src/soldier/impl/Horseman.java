@@ -19,8 +19,7 @@ public class Horseman extends SoldierAbstract {
 		heal_inter(HEALTHPOINTS);
 	}
 
-	public <T> T accept(VisitorArmy<T> visitor)
-	{
+	public <T> T accept(VisitorArmy<T> visitor) {
 		return visitor.visit(this);
 	}
 	

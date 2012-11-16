@@ -22,6 +22,8 @@ public interface ArmedUnit extends Army{
 	// the only new method compared to Soldier
 	public void addEquipment(String weaponType); 
 	
+	
+	public String getSoldierType();
 	@Override
 	public <T> T accept(VisitorArmy<T> visitor);
 }

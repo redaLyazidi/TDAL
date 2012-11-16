@@ -8,14 +8,7 @@ import soldier.impl.Infantryman;
 import army.Army;
 import army.VisitorArmy;
 
-public class VisitorArmyCount implements VisitorArmy<Integer>
-{
-
-	@Override 
-	public Integer visit(Army army)
-	{
-		return army.accept(this);
-	}
+public class VisitorArmyCount implements VisitorArmy<Integer> {
 
 	@Override
 	public Integer visit(Squadron squadron) {

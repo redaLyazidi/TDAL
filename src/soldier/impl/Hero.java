@@ -25,8 +25,7 @@ public class Hero extends SoldierAbstract {
 		return super.parry(force);
 	}
 	
-	public <T> T accept(VisitorArmy<T> visitor)
-	{
+	public <T> T accept(VisitorArmy<T> visitor) {
 		return visitor.visit(this);
 	}
 	

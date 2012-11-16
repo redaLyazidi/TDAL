@@ -13,11 +13,14 @@ public interface StatementBuilder {
 	public void endParagraph();
 
 	public void setTabulation();
+	public void setTabulation(int nb);
 
 	public void addLine(String s);
 
 	public void addStatement(String s);
 	
+	public void addLineFeed(int nb);
 	public void addLineFeed();
-
+	
+	public void addParagraph(String s);
 }

@@ -69,6 +69,11 @@ public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier 
 			return -1;
 	}
 	
+	@Override
+	public String getSoldierType() {
+		return soldier.getSoldierType();
+	}
+	
 	public abstract <T> T accept(VisitorArmy<T> visitor);
 	
 }

@@ -19,6 +19,8 @@ public interface Soldier
 
 	public float strike();
 
+	public String getSoldierType();
+	
 	public <T> T accept(VisitorArmy<T> visitor);
 	
 }
