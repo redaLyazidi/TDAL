@@ -26,13 +26,31 @@ Dans l'optique de pouvoir créer une armée de différents soldats équipés pou
 Différents choix d'implémentation se sont offerts à nous afin de concrétiser chacun des objectifs demandés.
 Le présent rapport explique les choix qui furent fait et la logique qui nous a conduit à les faire, ainsi que les difficultés rencontrées lors de l'implémentation.
 
+\newpage
 \section{L'Existant}
 \subsection{Description}
+Il s'agit du code de base qui nous a été donné. Il est constitué d'une architecture de base sur les soldats.
 \subsection{Modifications apportées}
-Dans le code de l'existant la méthode "heal" soignait même si le soldat était mort,
-dans le but de tests pour le \textbf{Composite}, il a été décidé d'implémenter \underline{\textbf{deux}} méthodes :
+Dans le code de l'existant, la méthode "heal" soignait même si le soldat était mort (celà revenait à le ressusciter).
+Dans le but de tests pour le \textbf{Composite}, il a été décidé d'implémenter \underline{\textbf{deux}} méthodes :
 \begin{enumerate}
- \item \textbf{infuse\_life} étant la "heal" de départ donc ressuscitant aussi
- \item \textbf{heal} qui ne ressuscite pas donc ne fonctionne que sur les soldats encore en vie.
+ \item \textbf{infuse\_life} étant la méthode "heal" de départ donc ressuscitant aussi;
+ \item \textbf{heal} qui ne ressuscite pas et qui ne fonctionne donc que sur les soldats encore en vie.
 \end{enumerate}
+
+\newpage
+\section{Implémentation}
+\subsection{Composite}
+Premier pattern que nous devions implémenter, il permet de \textbf{composer} une armée sans savoir son contenu.
+Nous avons choisi de créer une interface Army, implémentée par Squadron, qui contient ainsi autant de sous-armées voulues, via ses soldats.
+\subsection{Visitor}
+Le pattern Visitor, qui se couple très bien avec le précédent pattern, le pattern Composite, permet de \textbf{visiter} la composition créée par celui-çi. Celà permet de faire remonter une information sans connaître l'intérieur de la composition.
+Nous devions ainsi implémenter deux traitements :
+\begin{enumerate}
+ \item l'affichage de tous les soldats formant un groupe armé;
+ \item le comptage des soldats suivant leur type, au sein d'une armée.
+\end{enumerate}
+Pour celà, nous pensions d'abord créer une classe VisitorArmyCount qui compterait, pendant le parcours de l'armée, tout les types de soldats, en les stockant dans une Hashmap. Cependant, dans l'optique de ne pas risquer d'effets de bord (par exemple en utilisant plusieurs fois la même instance du visiteur) nous avons préféré utiliser la généricité. Il nous est alors possible de retourner différentes valeurs (telles que Integer et Void) lors du parcours, afin de remonter le nombre de soldats d'un type donné, alors passé en paramètre du visiteur.
+\subsection{Observer}
+
 \end{document}
