@@ -74,6 +74,4 @@ public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier 
 		return soldier.getSoldierType();
 	}
 	
-	public abstract <T> T accept(VisitorArmy<T> visitor);
-	
 }

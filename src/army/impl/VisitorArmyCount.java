@@ -2,9 +2,6 @@ package army.impl;
 
 import soldier.ArmedUnit;
 import soldier.Soldier;
-import soldier.impl.Hero;
-import soldier.impl.Horseman;
-import soldier.impl.Infantryman;
 import army.Army;
 import army.VisitorArmy;
 
@@ -25,22 +22,6 @@ public class VisitorArmyCount implements VisitorArmy<Integer> {
 
 
 	public Integer visit(Soldier soldier) {
-		return 1;
-	}
-
-	@Override
-	public Integer visit(Horseman horseman) {
-		return 1;
-	}
-
-
-	@Override
-	public Integer visit(Infantryman infantryman) {
-		return 1;
-	}
-
-	@Override
-	public Integer visit(Hero hero) {
 		return 1;
 	}
 

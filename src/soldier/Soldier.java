@@ -1,9 +1,7 @@
 package soldier;
 
-import army.VisitorArmy;
 
-public interface Soldier 
-{
+public interface Soldier {
 
 	public String getName();
 
@@ -20,7 +18,5 @@ public interface Soldier
 	public float strike();
 
 	public String getSoldierType();
-	
-	public <T> T accept(VisitorArmy<T> visitor);
 	
 }

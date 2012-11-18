@@ -1,7 +1,6 @@
 package soldier.impl;
 
 import soldier.SoldierAbstract;
-import army.VisitorArmy;
 
 public class Hero extends SoldierAbstract {
 
@@ -23,10 +22,6 @@ public class Hero extends SoldierAbstract {
 	@Override
 	public boolean parry(float force) {
 		return super.parry(force);
-	}
-	
-	public <T> T accept(VisitorArmy<T> visitor) {
-		return visitor.visit(this);
 	}
 	
 }

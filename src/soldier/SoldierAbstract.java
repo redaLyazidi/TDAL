@@ -1,6 +1,5 @@
 package soldier;
 
-import army.VisitorArmy;
 
 public abstract class SoldierAbstract implements Soldier {
 	protected String name;
@@ -40,16 +39,11 @@ public abstract class SoldierAbstract implements Soldier {
 		if( alive())
 			this.healthPoints = healthPoints;
 	}
-	
+
 	@Override
 	public String getSoldierType() {
 		return getClass().getSimpleName();
 	}
-	
-	public  <T> T accept(VisitorArmy<T> visitor) {
-		System.out.println("coucou");
-		return null;
-	}
-	
-	
+
 }
+

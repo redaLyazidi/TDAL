@@ -3,11 +3,7 @@ package army.impl;
 import java.util.List;
 
 import soldier.ArmedUnit;
-import soldier.Soldier;
 import soldier.impl.ArmedUnitSoldier;
-import soldier.impl.Hero;
-import soldier.impl.Horseman;
-import soldier.impl.Infantryman;
 import army.Army;
 import army.VisitorArmy;
 import builder.BuilderType;
@@ -63,7 +59,6 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 	public Void visit(Squadron squadron) {
 		int parenttab = nbtab;
 		nbtab ++;
-		//		statement.addLineFeed();
 		addStatementAtthecurrentPosition("squadron:");
 		statement.addLineFeed();
 		nbtab ++;
@@ -72,7 +67,6 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 		addStatementAtthecurrentPosition("regiment: ");
 		statement.addLineFeed();
 		for( Army a: squadron.getRegiment()) {
-			System.out.println(a.getName());
 			a.accept(this);
 		}
 		nbtab = parenttab;
@@ -94,29 +88,7 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 
 		List<String> equipments = ((ArmedUnitSoldier)soldier).getEquipmentsLabel();
 		statement.addStatement(equipments.toString());
-		soldier.getSoldier().accept(this);
 		nbtab--;
-		return null;
-	}
-
-	@Override
-	public Void visit(Horseman horseman) {
-		return null;
-	}
-
-	@Override
-	public Void visit(Infantryman infantryman) {
-//		statement.setTabulation(nbtab);
-//		statement.addStatement("type: " +infantryman.getClass().getSimpleName());
-		nbtab--;
-		return null;
-	}
-
-	@Override
-	public Void visit(Hero hero) {
-//		statement.setTabulation(nbtab);
-//		statement.addStatement("type: " +hero.getClass().getSimpleName());
-		nbtab --;
 		return null;
 	}
 
@@ -134,12 +106,6 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 	private void addStatementAtthecurrentPosition(String s) {
 		statement.setTabulation(nbtab);
 		statement.addStatement(s);
-	}
-
-	@Override
-	public Void visit(Soldier soldier) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
