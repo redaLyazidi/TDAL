@@ -60,11 +60,9 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 		int parenttab = nbtab;
 		nbtab ++;
 		addStatementAtthecurrentPosition("squadron:");
-		statement.addLineFeed();
 		nbtab ++;
-		addStatementAtthecurrentPosition("name: " + squadron.getName());
-		statement.addLineFeed();
-		addStatementAtthecurrentPosition("regiment: ");
+		addnewLineStatementAtthecurrentPosition("name: " + squadron.getName());
+		addnewLineStatementAtthecurrentPosition("regiment: ");
 		statement.addLineFeed();
 		for( Army a: squadron.getRegiment()) {
 			a.accept(this);
@@ -83,9 +81,7 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 		
 		addnewLineStatementAtthecurrentPosition("type: " + soldier.getSoldierType());
 
-		statement.addLineFeed();
-		addStatementAtthecurrentPosition("weapons: ");
-
+		addnewLineStatementAtthecurrentPosition("weapons: ");
 		List<String> equipments = ((ArmedUnitSoldier)soldier).getEquipmentsLabel();
 		statement.addStatement(equipments.toString());
 		nbtab--;
