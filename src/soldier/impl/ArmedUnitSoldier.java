@@ -91,10 +91,14 @@ public class ArmedUnitSoldier implements ArmedUnit {
 	}
 	
 	public <T> T accept(VisitorArmy<T> visitor) {
-		System.out.println("Bad luck bryan");
-		return visitor.visit(soldier);
+		return visitor.visit(this);
 	}
 
+	
+	public Soldier getSoldier() {
+		return soldier;
+	}
+	
 	@Override
 	public String getSoldierType() {
 		return soldier.getSoldierType();

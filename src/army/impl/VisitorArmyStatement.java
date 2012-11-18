@@ -1,6 +1,5 @@
 package army.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import soldier.ArmedUnit;
@@ -86,45 +85,37 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 		addStatementAtthecurrentPosition("ArmedUnit:");
 		nbtab++;
 
-		statement.addLineFeed();
-		addStatementAtthecurrentPosition("name: " + soldier.getName());
+		addnewLineStatementAtthecurrentPosition("name: " + soldier.getName());
+		
+		addnewLineStatementAtthecurrentPosition("type: " + soldier.getSoldierType());
 
 		statement.addLineFeed();
 		addStatementAtthecurrentPosition("weapons: ");
 
 		List<String> equipments = ((ArmedUnitSoldier)soldier).getEquipmentsLabel();
 		statement.addStatement(equipments.toString());
-		soldier.accept(this);
-		nbtab--;
-		return null;
-	}
-
-	@Override
-	public Void visit(Soldier soldier) {
+		soldier.getSoldier().accept(this);
 		nbtab--;
 		return null;
 	}
 
 	@Override
 	public Void visit(Horseman horseman) {
-		statement.setTabulation(nbtab);
-		statement.addStatement("type: " +horseman.getClass().getSimpleName());
-		nbtab--;
 		return null;
 	}
 
 	@Override
 	public Void visit(Infantryman infantryman) {
-		statement.setTabulation(nbtab);
-		statement.addStatement("type: " +infantryman.getClass().getSimpleName());
+//		statement.setTabulation(nbtab);
+//		statement.addStatement("type: " +infantryman.getClass().getSimpleName());
 		nbtab--;
 		return null;
 	}
 
 	@Override
 	public Void visit(Hero hero) {
-		statement.setTabulation(nbtab);
-		statement.addStatement("type: " +hero.getClass().getSimpleName());
+//		statement.setTabulation(nbtab);
+//		statement.addStatement("type: " +hero.getClass().getSimpleName());
 		nbtab --;
 		return null;
 	}
@@ -135,9 +126,20 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 	}
 
 
+	private void addnewLineStatementAtthecurrentPosition(String s) {
+		statement.addLineFeed();
+		addStatementAtthecurrentPosition(s);
+	}
+	
 	private void addStatementAtthecurrentPosition(String s) {
 		statement.setTabulation(nbtab);
 		statement.addStatement(s);
+	}
+
+	@Override
+	public Void visit(Soldier soldier) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

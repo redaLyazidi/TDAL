@@ -74,8 +74,6 @@ public class SquadronTest {
 		Squadron randomarmy = new Squadron("random");
 		assertEquals(randomarmy.getName(), "random");
 		assertNotSame(randomarmy.getName(), "Random");
-		ArmedUnit soldier = new ArmedUnitSoldier("Hero", "a hero");
-		System.out.println(soldier.getSoldierType());
 	}
 
 	@Test

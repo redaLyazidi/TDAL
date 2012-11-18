@@ -14,7 +14,7 @@ public class TestUnitSoldier {
 
 	@Before
 	public void setUp() throws Exception {
-		sf = new ArmedUnitSoldier("InfantryMan", "Gogol");
+		sf = new ArmedUnitSoldier("Infantryman", "Gogol");
 		sc = new ArmedUnitSoldier("Horseman", "Sanchez");
 	}
 
@@ -31,7 +31,6 @@ public class TestUnitSoldier {
 			;
 		}
 		assertEquals("Unexpected death of  " + sf.getName() + " with shield", i, 9);
-		System.out.println("avant le 2� infuse_life");
 		sf.infuse_life();
 		sf.addEquipment("Sword");
 		for (i = 0; sf.parry(sc.strike()); i++) {

@@ -12,6 +12,6 @@ public class SoldierWithDeathnote extends SoldierArmedAbstract<Deathnote> {
 
 	public <T> T accept(VisitorArmy<T> visitor)
 	{
-		return visitor.visit(this.soldier);
+		return visitor.visit(this);
 	}
 }

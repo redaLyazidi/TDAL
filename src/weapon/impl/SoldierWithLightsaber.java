@@ -12,7 +12,7 @@ public class SoldierWithLightsaber extends SoldierArmedAbstract<Lightsaber> {
 
 	public <T> T accept(VisitorArmy<T> visitor)
 	{
-		return visitor.visit(this.soldier);
+		return visitor.visit(this);
 	}
 
 }
