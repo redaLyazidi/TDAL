@@ -62,7 +62,7 @@ public class Squadron implements Army {
 		for (Army a : regiment)
 			a.heal();
 	}
-	
+
 	@Override
 	public void infuse_life() {
 		for (Army a : regiment)
@@ -98,7 +98,7 @@ public class Squadron implements Army {
 		for (Army a : regiment)
 			a.addEquipment(weaponType);
 	}
-	
+
 	public void addArmy(Army army) { //Impossible to add itself
 		if(!equals(army))	
 			regiment.add(army);
@@ -108,21 +108,20 @@ public class Squadron implements Army {
 		for (Army a : listArmy)
 			addArmy(a);
 	}
-	
+
 	public boolean removeArmy(Army army) {
 		return regiment.remove(army);
 	}
-	
+
 	public void removeAllArmies(Collection<? extends Army> armies) {
 		regiment.removeAll(armies);
 	}
-	
+
 	public List<Army> getRegiment() {
 		return regiment;
 	}
 
-	public <T> T accept(VisitorArmy<T> visitor)
-	{
+	public <T> T accept(VisitorArmy<T> visitor) {
 		return visitor.visit(this);
 	}
 

@@ -59,10 +59,10 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 	public Void visit(Squadron squadron) {
 		int parenttab = nbtab;
 		nbtab ++;
-		addStatementAtthecurrentPosition("squadron:");
+		addStatementAtTheCurrentPosition("squadron:");
 		nbtab ++;
-		addnewLineStatementAtthecurrentPosition("name: " + squadron.getName());
-		addnewLineStatementAtthecurrentPosition("regiment: ");
+		addNewLineStatementAtTheCurrentPosition("name: " + squadron.getName());
+		addNewLineStatementAtTheCurrentPosition("regiment: ");
 		statement.addLineFeed();
 		for( Army a: squadron.getRegiment()) {
 			a.accept(this);
@@ -74,14 +74,14 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 	@Override
 	public Void visit(ArmedUnit soldier) {
 		nbtab++;
-		addStatementAtthecurrentPosition("ArmedUnit:");
+		addStatementAtTheCurrentPosition("ArmedUnit:");
 		nbtab++;
 
-		addnewLineStatementAtthecurrentPosition("name: " + soldier.getName());
+		addNewLineStatementAtTheCurrentPosition("name: " + soldier.getName());
 		
-		addnewLineStatementAtthecurrentPosition("type: " + soldier.getSoldierType());
+		addNewLineStatementAtTheCurrentPosition("type: " + soldier.getSoldierType());
 
-		addnewLineStatementAtthecurrentPosition("weapons: ");
+		addNewLineStatementAtTheCurrentPosition("weapons: ");
 		List<String> equipments = ((ArmedUnitSoldier)soldier).getEquipmentsLabel();
 		statement.addStatement(equipments.toString());
 		nbtab--;
@@ -94,12 +94,12 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 	}
 
 
-	private void addnewLineStatementAtthecurrentPosition(String s) {
+	private void addNewLineStatementAtTheCurrentPosition(String s) {
 		statement.addLineFeed();
-		addStatementAtthecurrentPosition(s);
+		addStatementAtTheCurrentPosition(s);
 	}
 	
-	private void addStatementAtthecurrentPosition(String s) {
+	private void addStatementAtTheCurrentPosition(String s) {
 		statement.setTabulation(nbtab);
 		statement.addStatement(s);
 	}

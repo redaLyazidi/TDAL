@@ -1,7 +1,7 @@
 package army;
 
-public interface Army 
-{
+
+public interface Army {
 
 	public String getName();
 
@@ -20,5 +20,4 @@ public interface Army
 	public void addEquipment(String weaponType); 
 	
 	public <T> T accept(VisitorArmy<T> visitor);
-	
 }
