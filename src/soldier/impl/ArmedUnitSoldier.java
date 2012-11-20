@@ -90,11 +90,6 @@ public class ArmedUnitSoldier implements ArmedUnit {
 		return equipments;
 	}
 	
-	public <T> T accept(VisitorArmy<T> visitor) {
-		return visitor.visit(this);
-	}
-
-	
 	public Soldier getSoldier() {
 		return soldier;
 	}
@@ -104,4 +99,8 @@ public class ArmedUnitSoldier implements ArmedUnit {
 		return soldier.getSoldierType();
 	}
 
+	@Override
+	public <T> T accept(VisitorArmy<T> visitor) {
+		return visitor.visit(this);
+	}
 }

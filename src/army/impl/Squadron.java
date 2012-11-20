@@ -7,7 +7,7 @@ import java.util.List;
 import army.Army;
 import army.VisitorArmy;
 
-public class Squadron implements Army {
+public class Squadron extends ALObservable implements Army {
 
 	private List<Army> regiment;
 	private String name;
@@ -75,6 +75,10 @@ public class Squadron implements Army {
 		for(Army a : regiment){
 			parry =  a.parry(force / regiment.size()) || parry;
 		}
+		if (alive()) 
+			notifyObservers("alive");
+		else
+			notifyObservers("dead");
 		return parry;
 	}
 
