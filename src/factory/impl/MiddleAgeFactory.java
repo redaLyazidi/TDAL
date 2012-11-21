@@ -2,15 +2,17 @@ package factory.impl;
 
 import soldier.ArmedUnit;
 import soldier.SoldierType;
-import soldier.impl.ArmedUnitSoldier;
-import factory.ArmedUnitFactory;
 import weapon.WeaponType;
+import factory.AbstractArmedUnitFactory;
 
-public class MiddleAgeFactory implements ArmedUnitFactory {
+public class MiddleAgeFactory extends AbstractArmedUnitFactory {
 
+	private final static SoldierType infantryman = SoldierType.Infantryman;
+	private final static SoldierType horseman = SoldierType.Horseman;
+	
 	@Override
 	public ArmedUnit createInfantryman(String name) {
-		return new ArmedUnitSoldier(SoldierType.Infantryman.toString(), name);
+		return super.createArmedUnit(name, infantryman);
 	}
 
 	@Override
@@ -22,8 +24,9 @@ public class MiddleAgeFactory implements ArmedUnitFactory {
 
 	@Override
 	public ArmedUnit createInfantrymanWithDefensiveWeapon(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ArmedUnit armedUnit = createInfantryman(name);
+		armedUnit.addEquipment(WeaponType.Shield.toString());
+		return armedUnit;
 	}
 
 	@Override
@@ -34,8 +37,7 @@ public class MiddleAgeFactory implements ArmedUnitFactory {
 
 	@Override
 	public ArmedUnit createHorseman(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return super.createArmedUnit(name, horseman);
 	}
 
 	@Override
@@ -56,7 +58,6 @@ public class MiddleAgeFactory implements ArmedUnitFactory {
 		return null;
 	}
 
-	
 
 
 }
