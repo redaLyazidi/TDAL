@@ -1,5 +1,5 @@
 package weapon;
 
 public enum WeaponType {
-	Sword, Shield, AK47, BallisticVest, Lightsaber, Deathnote;
+	Sword, Shield, AK47, BallisticVest, Lightsaber, Force, Deathnote;
 }
