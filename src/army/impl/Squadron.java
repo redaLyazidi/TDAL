@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import util.ALObservable;
+
 import army.Army;
 import army.VisitorArmy;
 
