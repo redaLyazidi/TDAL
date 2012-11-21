@@ -17,22 +17,19 @@ public class MiddleAgeFactory extends AbstractArmedUnitFactory {
 
 	@Override
 	public ArmedUnit createInfantrymanWithOffensiveWeapon(String name) {
-		ArmedUnit armedUnit = createHorseman(name);
-		armedUnit.addEquipment(WeaponType.Sword.toString());
-		return armedUnit;
+		return createArmedUnitWithEquipment(name, infantryman, WeaponType.Sword);
 	}
 
 	@Override
 	public ArmedUnit createInfantrymanWithDefensiveWeapon(String name) {
-		ArmedUnit armedUnit = createInfantryman(name);
-		armedUnit.addEquipment(WeaponType.Shield.toString());
-		return armedUnit;
+		return createArmedUnitWithEquipment(name, infantryman, WeaponType.Shield);
 	}
 
 	@Override
 	public ArmedUnit createInfantrymanWithBothWeapon(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ArmedUnit armedUnit = createInfantrymanWithOffensiveWeapon(name);
+		addEquipment(armedUnit, WeaponType.Shield);
+		return armedUnit;
 	}
 
 	@Override
@@ -42,20 +39,19 @@ public class MiddleAgeFactory extends AbstractArmedUnitFactory {
 
 	@Override
 	public ArmedUnit createHorsemanWithOffensiveWeapon(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return createArmedUnitWithEquipment(name, horseman, WeaponType.Sword);
 	}
 
 	@Override
 	public ArmedUnit createHorsemanWithDefensiveWeapon(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return createArmedUnitWithEquipment(name, horseman, WeaponType.Shield);
 	}
 
 	@Override
 	public ArmedUnit createHorsemanWithBothWeapon(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ArmedUnit armedUnit = createHorsemanWithOffensiveWeapon(name);
+		addEquipment(armedUnit, WeaponType.Shield);
+		return armedUnit;
 	}
 
 

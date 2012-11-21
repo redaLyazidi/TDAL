@@ -12,13 +12,12 @@ public abstract class AbstractArmedUnitFactory implements ArmedUnitFactory {
 		return new ArmedUnitSoldier(soldierType.toString(), name);
 	}
 
-	protected ArmedUnit createArmedUnitWithBothWeapon(String name, SoldierType soldierType, WeaponType offensiveWeapon, WeaponType defensiveWeapon) {
-		ArmedUnit armedUnit = createArmedUnit(name, soldierType);
-		addEquipment(armedUnit, offensiveWeapon);
-		addEquipment(armedUnit, defensiveWeapon);
+	protected ArmedUnit createArmedUnitWithEquipment(String name, SoldierType soldierType, WeaponType weaponType) {
+		ArmedUnit armedUnit = new ArmedUnitSoldier(soldierType.toString(), name);
+		addEquipment(armedUnit, weaponType);
 		return armedUnit;
 	}
-
+	
 	protected void addEquipment(ArmedUnit armedUnit,WeaponType weaponType) {
 		if (weaponType != null) 
 			armedUnit.addEquipment(weaponType.toString());
