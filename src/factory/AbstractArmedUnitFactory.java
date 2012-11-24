@@ -70,8 +70,6 @@ public abstract class AbstractArmedUnitFactory implements ArmedUnitFactory {
 		return armedUnit;
 	}
 
-	
-	
 	protected ArmedUnit createArmedUnit(String name, SoldierType soldierType) {
 		return new ArmedUnitSoldier(soldierType.toString(), name);
 	}

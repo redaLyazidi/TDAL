@@ -7,12 +7,11 @@ import army.VisitorArmy;
 
 public class VisitorArmyCount implements VisitorArmy<Integer> {
 
-	private final SoldierType soldierType;
+	private SoldierType soldierType;
 	
 	
 	public VisitorArmyCount() {
-		super();
-		this.soldierType = null;
+		this(null);
 	}
 	
 	public VisitorArmyCount(SoldierType soldierType) {
@@ -28,6 +27,14 @@ public class VisitorArmyCount implements VisitorArmy<Integer> {
 		return count;
 	}
 
+	
+	public SoldierType getSoldierType() {
+		return soldierType;
+	}
+	
+	public void setSoldierType (SoldierType soldierType) {
+		this.soldierType = soldierType;
+	}
 	
 
 	@Override

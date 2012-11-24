@@ -1,6 +1,5 @@
 package weapon;
 
-import army.VisitorArmy;
 import soldier.Soldier;
 
 public abstract class SoldierArmedAbstract<W extends Weapon> implements Soldier {
