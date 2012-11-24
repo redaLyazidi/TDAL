@@ -35,7 +35,6 @@ public class VisitorArmyCount implements VisitorArmy<Integer> {
 	public void setSoldierType (SoldierType soldierType) {
 		this.soldierType = soldierType;
 	}
-	
 
 	@Override
 	public Integer visit(ArmedUnit soldier) {
@@ -43,5 +42,4 @@ public class VisitorArmyCount implements VisitorArmy<Integer> {
 			return 1;
 		return 0;
 	}
-
 }

@@ -17,6 +17,8 @@ import soldier.SoldierType;
 import soldier.impl.ArmedUnitSoldier;
 import weapon.WeaponType;
 import army.impl.Squadron;
+import army.impl.VisitorArmyCount;
+import army.impl.VisitorArmyStatement;
 
 public class SquadronTest {
 
@@ -34,6 +36,8 @@ public class SquadronTest {
 	private List<Army> horsemen;
 
 	private Army achille;
+
+	private VisitorArmyCount visitorArmyCount = new VisitorArmyCount();
 
 	private final static Army monkey0 = new ArmedUnitSoldier(SoldierType.Infantryman.toString(), "monkey0");
 	private final static Army godefroy = new ArmedUnitSoldier(SoldierType.Horseman.toString(), "MontMiraille");
@@ -144,6 +148,8 @@ public class SquadronTest {
 	@Test
 	public void testParry() {
 		montmirailleArmy.addAllArmies(horsemen);
+		
+		assertTrue(montmirailleArmy.accept(new VisitorArmyCount()) == nbcannonFodder);
 		float fullHealth = montmirailleArmy.getHealthPoints();
 		float force = 100;
 		assertTrue(godefroy.parry(force) == montmirailleArmy.parry(force));
@@ -159,8 +165,11 @@ public class SquadronTest {
 		assertTrue(monkeys.strike() == monkeysStrike);
 
 		Army montmirailleArmy = new Squadron("horsemen");
+		assertTrue(montmirailleArmy.accept(visitorArmyCount) == 0);
+		
 		((Squadron) montmirailleArmy).addAllArmies(horsemen);
 
+		assertTrue(montmirailleArmy.accept(visitorArmyCount) == nbcannonFodder);
 		assertTrue(monkeys.strike() == monkeysStrike);
 		assertTrue(montmirailleArmy.strike() == montmirailleStrike);
 		assertTrue(rabbids.strike() ==  ravingrabbitsStrike);
@@ -177,6 +186,10 @@ public class SquadronTest {
 
 		compagnie7.addArmy(montmirailleArmy);
 		assertTrue(compagnie7.strike() == logicalfullarmyStrike);
+		int compagnie7VisitResult = compagnie7.accept(visitorArmyCount);
+		int sumOfothers = montmirailleArmy.accept(visitorArmyCount) + monkeys.accept(visitorArmyCount)
+				+ rabbids.accept(visitorArmyCount);
+		assertTrue(compagnie7VisitResult == sumOfothers);
 	}
 
 	@Test
