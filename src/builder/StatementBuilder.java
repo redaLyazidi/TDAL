@@ -1,5 +1,8 @@
 package builder;
 
+import java.io.File;
+import java.io.IOException;
+
 public interface StatementBuilder {
 
 	public void reset();
@@ -23,4 +26,8 @@ public interface StatementBuilder {
 	public void addLineFeed();
 	
 	public void addParagraph(String s);
+	
+	public void writeToFileNIOWay2(String file) throws IOException;
+	
+	public void writeToFileNIOWay2(File file) throws IOException;
 }

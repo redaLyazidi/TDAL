@@ -1,5 +1,12 @@
 package builder;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+
 public abstract class AbstractBuilder implements StatementBuilder {
 
 	protected StringBuilder statement = new StringBuilder();
@@ -37,6 +44,25 @@ public abstract class AbstractBuilder implements StatementBuilder {
 	@Override
 	public void setTabulation(int nb) {
 		for (int i =0; i < nb ; i++)
-			statement.append('\t');
+			setTabulation();
+	}
+
+	@Override
+	public void writeToFileNIOWay2(String file) throws IOException {
+		writeToFileNIOWay2(new File(file));
+	}
+	
+	@Override
+	public void writeToFileNIOWay2(File file) throws IOException {
+		final byte[] messageBytes = statement.toString().getBytes(Charset.forName("UTF-8"));
+		final long appendSize = messageBytes.length;
+		final RandomAccessFile raf = new RandomAccessFile(file, "rw");
+		raf.seek(raf.length());
+		final FileChannel fc = raf.getChannel();
+		final MappedByteBuffer mbf = fc.map(FileChannel.MapMode.READ_WRITE, fc.
+				position(), appendSize);
+		fc.close();
+		mbf.put(messageBytes);
+		raf.close();		
 	}
 }

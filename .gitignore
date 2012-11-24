@@ -7,3 +7,5 @@
 bin/*
 /nbproject/
 /build.xml
+/squadron.txt
+/*.html

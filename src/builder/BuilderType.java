@@ -1,5 +1,8 @@
 package builder;
 
+import builder.impl.BuilderString;
+import builder.impl.HtmlBuilder;
+
 public enum BuilderType {
 
 	String ,HTML;
