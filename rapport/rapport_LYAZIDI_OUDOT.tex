@@ -1,4 +1,4 @@
-﻿\documentclass[12pt]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
@@ -29,7 +29,15 @@ Le présent rapport explique les choix qui furent fait et la logique qui nous a 
 \newpage
 \section{L'Existant}
 \subsection{Description}
-Il s'agit du code de base qui nous a été donné. Il est constitué d'une architecture de base sur les soldats.
+Il s'agit du code de base qui nous a été donné. Il est constitué d'une architecture de base sur les soldats.\\
+L'existant repose sur \textbf{2} design patterns :
+\begin{enumerate}
+\item[•\textbf{Decorator}] Il modélise le fait pour un soldat d'être armé,
+en effet, ainsi on obtient par exemple une classe SoldierWithSword contenant un Soldat
+
+\includegraphics[scale=0.5]{../UML/decorator}
+
+\end{enumerate}
 \subsection{Modifications apportées}
 Dans le code de l'existant, la méthode "heal" soignait même si le soldat était mort (celà revenait à le ressusciter).
 Dans le but de tests pour le \textbf{Composite}, il a été décidé d'implémenter \underline{\textbf{deux}} méthodes :
