@@ -4,50 +4,35 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import soldier.ArmedUnit;
 import soldier.Soldier;
 import soldier.SoldierType;
 import soldier.impl.ArmedUnitSoldier;
+import soldier.impl.Horseman;
 import soldier.impl.Infantryman;
 import soldier.impl.Sith;
+import soldier.impl.SithOnOverBoard;
+import weapon.SoldierArmedAbstract;
+import weapon.WeaponAbstract;
 import weapon.WeaponType;
+import weapon.impl.SoldierWithForce;
 import weapon.impl.SoldierWithLightsaber;
 import weapon.impl.SoldierWithShield;
 import weapon.impl.SoldierWithSword;
 import factory.impl.MiddleAgeFactory;
 import factory.impl.ScienceFictionFactory;
 
+
 public class AbstractArmedUnitFactoryTest {
 
-	
+
 	private AbstractArmedUnitFactory middleAgeFactory = new MiddleAgeFactory();
 	private AbstractArmedUnitFactory scienceFictionFactory = new ScienceFictionFactory();
-	
+
 	private ArmedUnit ma;
 	private ArmedUnit sf;
-	
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
 	public void testCreateInfantryman() {
@@ -63,46 +48,76 @@ public class AbstractArmedUnitFactoryTest {
 	public void testCreateInfantrymanWithOffensiveWeapon() {
 		ma = middleAgeFactory.createInfantrymanWithOffensiveWeapon("foobar");
 		sf = scienceFictionFactory.createInfantrymanWithOffensiveWeapon("barfoo");
-		testSoldierType();
-		
+		testInfantryType();
 		testOffensiveEquipment(ma.getSoldier(),sf.getSoldier());
 	}
 
 	@Test
 	public void testCreateInfantrymanWithDefensiveWeapon() {
-		fail("Not yet implemented");
+		ma = middleAgeFactory.createInfantrymanWithDefensiveWeapon("foobar");
+		sf = scienceFictionFactory.createInfantrymanWithDefensiveWeapon("barfoo");
+		testInfantryType();
+		testDefensiveEquipment(ma.getSoldier(), sf.getSoldier());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testCreateInfantrymanWithBothWeapon() {
-		fail("Not yet implemented");
+		ma = middleAgeFactory.createInfantrymanWithBothWeapon("foobar");
+		sf = scienceFictionFactory.createInfantrymanWithBothWeapon("barfoo");
+		testInfantryType();
+
+		testDefensiveEquipment(ma.getSoldier(),sf.getSoldier());
+		testOffensiveEquipment(((SoldierArmedAbstract<WeaponAbstract>) ma.getSoldier()).getSoldier(),
+				((SoldierArmedAbstract<WeaponAbstract>) sf.getSoldier()).getSoldier());
 	}
 
 	@Test
 	public void testCreateMobileUnit() {
-		fail("Not yet implemented");
+		ma = middleAgeFactory.createMobileUnit("foobar");
+		sf = scienceFictionFactory.createMobileUnit("barfoo");
+		assertEquals(ma.getName(), "foobar");
+		assertEquals(sf.getName(), "barfoo");
+		assertTrue(ma.getSoldier() instanceof Horseman);
+		assertTrue(sf.getSoldier() instanceof SithOnOverBoard);
 	}
 
 	@Test
 	public void testCreateMobileUnitWithOffensiveWeapon() {
-		fail("Not yet implemented");
+		ma = middleAgeFactory.createMobileUnitWithOffensiveWeapon("foobar");
+		sf = scienceFictionFactory.createMobileUnitWithOffensiveWeapon("barfoo");
+		testMobileUnitType();
+		testOffensiveEquipment(ma.getSoldier(),sf.getSoldier());
 	}
 
 	@Test
 	public void testCreateMobileUnitWithDefensiveWeapon() {
-		fail("Not yet implemented");
+		ma = middleAgeFactory.createMobileUnitWithDefensiveWeapon("foobar");
+		sf = scienceFictionFactory.createMobileUnitWithDefensiveWeapon("barfoo");
+		testDefensiveEquipment(ma.getSoldier(), sf.getSoldier());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testCreateMobileUnitWithBothWeapon() {
-		fail("Not yet implemented");
+		ma = middleAgeFactory.createMobileUnitWithBothWeapon("foobar");
+		sf = scienceFictionFactory.createMobileUnitWithBothWeapon("barfoo");
+		testMobileUnitType();
+
+		testDefensiveEquipment(ma.getSoldier(),sf.getSoldier());
+		testOffensiveEquipment(((SoldierArmedAbstract<WeaponAbstract>) ma.getSoldier()).getSoldier(),
+				((SoldierArmedAbstract<WeaponAbstract>) sf.getSoldier()).getSoldier());
 	}
 
-	private void testSoldierType() {
+	private void testInfantryType() {
 		assertEquals(ma.getSoldierType(), SoldierType.Infantryman.toString());
 		assertEquals(sf.getSoldierType(), SoldierType.Sith.toString());
 	}
-	
+
+	private void testMobileUnitType() {
+		assertEquals(ma.getSoldierType(), SoldierType.Horseman.toString());
+		assertEquals(sf.getSoldierType(), SoldierType.SithOnOverBoard.toString());
+	}
 	private void testOffensiveEquipment(Soldier mas, Soldier sfs) {
 		assertTrue(((ArmedUnitSoldier) ma).getEquipmentsLabel().contains(WeaponType.Sword.toString()));
 		assertTrue(((ArmedUnitSoldier) sf).getEquipmentsLabel().contains(WeaponType.Lightsaber.toString()));
