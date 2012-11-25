@@ -21,7 +21,9 @@
 \tableofcontents
 
 \newpage
-\section{Introduction}
+\vspace*{8cm}
+\begin{center} \section*{Introduction} \end{center}
+
 Dans l'optique de pouvoir créer une armée de différents soldats équipés pouvant se combattre, il nous avait été demandé d'implémenter une suite de design pattern.
 Différents choix d'implémentation se sont offerts à nous afin de concrétiser chacun des objectifs demandés.
 Le présent rapport explique les choix qui furent fait et la logique qui nous a conduit à les faire, ainsi que les difficultés rencontrées lors de l'implémentation.
@@ -32,14 +34,36 @@ Le présent rapport explique les choix qui furent fait et la logique qui nous a 
 Il s'agit du code de base qui nous a été donné. Il est constitué d'une architecture de base sur les soldats.\\
 L'existant repose sur \textbf{2} design patterns :
 \begin{enumerate}
-\item[•\textbf{Decorator}] Il modélise le fait pour un soldat d'être armé,
-en effet, ainsi on obtient par exemple une classe SoldierWithSword contenant un Soldat
+\item[\textbf{Decorator:}] Il modélise le fait pour un soldat d'être armé,
+en effet, ainsi on obtient par exemple une classe SoldierWithSword contenant un Soldat, comme il est visible sur ce diagramme ci-joint.
 
-\includegraphics[scale=0.5]{../UML/decorator}
+\includegraphics[scale=1]{../UML/Realdecorator}
 
+En effet ce diagramme est simplifié mais le fonctionnement est le même,
+pour le bouclier il y a une classe SoldierWithShield, et il est tout à fait 
+possible de décorer à l'infini (SoldierWith...With...With...).
+La décoration peut se représenter comme un arbre tel que chaque nœud(=soldat) a au plus un fils, la feuille est un simple soldat sans arme décrivant le type d'unité
+(infanterie, cavalerie,...).
+Le principal \textbf{défaut} est qu'on ne peut limiter la décoration,( par exemple un soldat avec n épées). De plus la méthode pour supprimer un équipement n'est pas triviale car il faut descendre dans la décoration jusqu'au bon niveau et enlever
+le nœud concerné (le parent pointe vers le fils de son fils), cependant
+hormis l'introspection il est impossible de savoir à quel arme correspond la décoration.
+
+\item[\textbf{Proxy:}] Son rôle est de servir d'intermédiaire pour la gestion de
+l'armement soit la décoration, le proxy est ArmedUnit contenant un soldat et
+liste d'armes, la classe ArmedUnitSoldier assure qu'un soldat ne peut avoir
+\textbf{qu'une arme de chaque}. L'avantage est que si d'autres types de soldats
+sont rajoutés ou de nouvelles armes, ArmedUnitSoldier les gèrera sans changer le 
+code. Le défaut est que si une nouvelle arme est implémentée, il faut absolument
+implémentée la décoration de soldat correspondante (SoldierWith{Arme}).
+
+Ainsi il est possible de créer/manipuler des soldats armés (ArmedUnit),
+sans avoir à gérer la décoration, c'est seulement si l'on souhaite rajouter des nouvelles armes.
+\includegraphics[scale=1]{../UML/Proxy}
+
+Cependant rien n'empêche de surcharger une unité avec énormément d'armes.
 \end{enumerate}
 \subsection{Modifications apportées}
-Dans le code de l'existant, la méthode "heal" soignait même si le soldat était mort (celà revenait à le ressusciter).
+Dans le code de l'existant, la méthode "heal" soignait même si le soldat était mort (cela revenait à le ressusciter).
 Dans le but de tests pour le \textbf{Composite}, il a été décidé d'implémenter \underline{\textbf{deux}} méthodes :
 \begin{enumerate}
  \item \textbf{infuse\_life} étant la méthode "heal" de départ donc ressuscitant aussi;
