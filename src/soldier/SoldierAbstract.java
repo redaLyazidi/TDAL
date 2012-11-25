@@ -1,7 +1,9 @@
 package soldier;
 
+import util.ALObservable;
 
-public abstract class SoldierAbstract implements Soldier {
+
+public abstract class SoldierAbstract extends ALObservable implements Soldier {
 	protected String name;
 	protected float healthPoints;
 	protected float force;
@@ -27,6 +29,10 @@ public abstract class SoldierAbstract implements Soldier {
 	public boolean parry(float force) { // default: no parry effect
 		healthPoints = (getHealthPoints() > force) ? getHealthPoints() - force
 				: 0;
+		
+		if (this.healthPoints <= 0)
+			this.notifyObservers();
+		
 		return healthPoints > 0;
 	}
 

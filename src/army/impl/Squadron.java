@@ -77,10 +77,10 @@ public class Squadron extends ALObservable implements Army {
 		for(Army a : regiment){
 			parry =  a.parry(force / regiment.size()) || parry;
 		}
-		if (alive()) 
-			notifyObservers("alive");
-		else
-			notifyObservers("dead");
+		
+		if (!this.alive()) 
+			this.notifyObservers();
+		
 		return parry;
 	}
 

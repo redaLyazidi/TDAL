@@ -18,7 +18,6 @@ import soldier.impl.ArmedUnitSoldier;
 import weapon.WeaponType;
 import army.impl.Squadron;
 import army.impl.VisitorArmyCount;
-import army.impl.VisitorArmyStatement;
 
 public class SquadronTest {
 
