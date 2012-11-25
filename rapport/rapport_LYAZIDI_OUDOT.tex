@@ -81,8 +81,8 @@ Nous avons choisi de créer une interface Army, implémentée par Squadron, qui 
 \includegraphics[scale=1]{../UML/Composite}
 
 Ainsi une armée représente de 0 à \textbf{n} soldats.
-Contrairement au décorator ici la structure de données pour représenter ce pattern
-est un arbre, dont les feuilles sont les ArmedUnit.
+Contrairement au decorator ici la structure de données pour représenter ce pattern
+est un arbre (nombre de fils 0 à n, dont les feuilles sont les ArmedUnit.
 Quel que soit la disposition des soldats dans le composite, l'armée inflige 
 toujours autant de dégâts, soit la somme des soldats, il en va de même pour les 
 points de vie.
@@ -91,7 +91,26 @@ Soit dans un arbre chaque nœud ne s'occupe que de ses fils directs.
 L'escadron répartit de manière équitable les dégâts entre ses membres.
 Ainsi la répartition des dégâts se fait par nœud, donc selon la disposition
 chaque unité ne subit pas le même nombre de dégâts.
-Pour résumer chaque soldat du même escadron subissent autant de dé
+Pour résumer chaque soldat du même escadron subit autant de dégâts que
+ses frères et si l'un d'eux est un escadron il les répartit parmi à ses
+fils.
+Ainsi les dégâts qu'une unité subit dépend de 2 paramètre :
+\begin{enumerate}
+\item le nombre de d'armées dans l'escadron car plus il y a de membres plus
+les dégâts sont divisés
+\item son niveau dans la hiérarchie (l'arbre), car plus on en descend dans la
+composition plus les dégâts on était dispersé parmi les autres armées.\\
+La gestion de l'armement repose sur le principe du composite, on ajoute une arme
+à une armée, si c'est un seul soldat alors on lui ajoute l'arme comme le fait le
+proxy, si c'est un escadron alors on ajoute l'arme à chaque membre de l'escadron,
+et comme il a été cité précédemment si une unité reçoit une arme qu'elle avait
+déjà aucun changement (pour cette unité) a lieu.
+Un défaut est qu'il est possible d'ajouter des armes à une armée vide,
+bien qu'au final l'armée n'a pas les moyens de stocker l'arme donc aucune 
+conséquence, mais la méthode n'est pas bloquante.
+
+Une armée est morte quand \textbf{tous} ces soldats sont morts.
+\end{enumerate}
 \subsection{Visitor}
 Le pattern Visitor, qui se couple très bien avec le précédent pattern, le pattern Composite, permet de \textbf{visiter} la composition créée par celui-çi. Celà permet de faire remonter une information sans connaître l'intérieur de la composition.
 Nous devions ainsi implémenter deux traitements :
@@ -99,7 +118,7 @@ Nous devions ainsi implémenter deux traitements :
  \item l'affichage de tous les soldats formant un groupe armé;
  \item le comptage des soldats suivant leur type, au sein d'une armée.
 \end{enumerate}
-Pour celà, nous pensions d'abord créer une classe VisitorArmyCount qui compterait, pendant le parcours de l'armée, tout les types de soldats, en les stockant dans une Hashmap. Cependant, dans l'optique de ne pas risquer d'effets de bord (par exemple en utilisant plusieurs fois la même instance du visiteur) nous avons préféré utiliser la généricité. Il nous est alors possible de retourner différentes valeurs (telles que Integer et Void) lors du parcours, afin de remonter le nombre de soldats d'un type donné, alors passé en paramètre du visiteur.
+Pour cela, nous pensions d'abord créer une classe VisitorArmyCount qui compterait, pendant le parcours de l'armée, tout les types de soldats, en les stockant dans une Hashmap. Cependant, dans l'optique de ne pas risquer d'effets de bord (par exemple en utilisant plusieurs fois la même instance du visiteur) nous avons préféré utiliser la généricité. Il nous est alors possible de retourner différentes valeurs (telles que Integer et Void) lors du parcours, afin de remonter le nombre de soldats d'un type donné, alors passé en paramètre du visiteur.
 \subsection{Observer}
 
 \end{document}
