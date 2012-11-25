@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -226,6 +227,14 @@ public class SquadronTest {
 		compagnie7.removeAllArmies(horsemen);
 		assertTrue(compagnie7.strike() + montmirailleArmy.strike() == compagnie7Strike);
 		assertTrue(compagnie7.getHealthPoints() + montmirailleArmy.getHealthPoints() == compagnie7HealthPoints);
+	}
+
+	@Test
+	public void testAccept() {
+		VisitorArmyCount v = new VisitorArmyCount(SoldierType.Infantryman);
+		assertTrue( monkeys.accept(v) == twelveMonkeys);
+		v.setSoldierType(SoldierType.Horseman);
+		assertTrue( monkeys.accept(v) == 0);
 	}
 
 }
