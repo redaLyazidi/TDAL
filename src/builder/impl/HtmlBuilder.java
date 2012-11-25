@@ -1,4 +1,6 @@
 package builder.impl;
+import java.io.IOException;
+
 import builder.AbstractBuilder;
 
 public class HtmlBuilder extends AbstractBuilder {
@@ -49,5 +51,9 @@ public class HtmlBuilder extends AbstractBuilder {
 		statement.append("<br/>\n");
 	}
 
+	@Override
+	public void writeToFileNIOWay2(String file) throws IOException {
+		super.writeToFileNIOWay2("ArmyReport/HTML/" + file);
+	}
 
 }

@@ -1,5 +1,8 @@
 package builder.impl;
 
+import java.io.File;
+import java.io.IOException;
+
 import builder.AbstractBuilder;
 
 public class BuilderString extends AbstractBuilder {
@@ -45,4 +48,8 @@ public class BuilderString extends AbstractBuilder {
 		statement.append('\n');
 	}
 
+	@Override
+	public void writeToFileNIOWay2(String file) throws IOException {
+		super.writeToFileNIOWay2("ArmyReport/TXT/" + file);
+	}
 }

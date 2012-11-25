@@ -1,0 +1,8 @@
+Army:
+	squadron:
+		name: squadron
+		regiment: 
+			ArmedUnit:
+				name: bryan
+				type: Infantryman
+				weapons: []
