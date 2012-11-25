@@ -49,8 +49,7 @@ Le principal \textbf{défaut} est qu'on ne peut limiter la décoration,( par exe
 le nœud concerné (le parent pointe vers le fils de son fils), cependant
 hormis l'introspection il est impossible de savoir à quel arme correspond la décoration.
 
-\item[\textbf{Proxy:}] Son rôle est de servir d'intermédiaire pour la gestion de
-l'armement soit la décoration, le proxy est ArmedUnit représentant un soldat armé.
+\item[\textbf{Proxy:}] Son rôle est de servir d'intermédiaire pour la gestion de l'armement, il s'agit de la décoration. le proxy est ArmedUnit représentant un soldat armé.\\
 Ainsi la classe ArmedUnitSoldier possède un soldat et une liste d'armes,
 cela assure qu'un soldat ne peut avoir \textbf{qu'une arme de chaque}.
 L'avantage est que si d'autres types de soldats
@@ -109,10 +108,10 @@ Un défaut est qu'il est possible d'ajouter des armes à une armée vide,
 bien qu'au final l'armée n'a pas les moyens de stocker l'arme donc aucune 
 conséquence, mais la méthode n'est pas bloquante.
 
-Une armée est morte quand \textbf{tous} ces soldats sont morts.
+Une armée est morte quand \textbf{tous} ses soldats sont morts.
 \end{enumerate}
 \subsection{Visitor}
-Le pattern Visitor, qui se couple très bien avec le précédent pattern, le pattern Composite, permet de \textbf{visiter} la composition créée par celui-çi. Celà permet de faire remonter une information sans connaître l'intérieur de la composition.
+Le pattern Visitor, qui se couple très bien avec le précédent pattern, le pattern Composite, permet de \textbf{visiter} la composition créée par celui-çi. Cela permet de faire remonter une information sans connaître l'intérieur de la composition.
 Nous devions ainsi implémenter deux traitements :
 \begin{enumerate}
  \item l'affichage de tous les soldats formant un groupe armé;
