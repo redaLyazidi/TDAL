@@ -100,6 +100,10 @@ public class VisitorArmyStatement implements VisitorArmy<Void> {
 		statement.writeToFileNIOWay2(file);
 	}
 	
+	public void setStatement(BuilderType buildertype) {
+		statement = buildertype.getBuilder();
+	}
+
 	public void save(File file) throws IOException {
 		statement.writeToFileNIOWay2(file);
 

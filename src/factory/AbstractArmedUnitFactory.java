@@ -13,8 +13,6 @@ public abstract class AbstractArmedUnitFactory implements ArmedUnitFactory {
 	protected WeaponType offensiveType;
 	protected WeaponType defensiveType;
 	
-	
-
 	public AbstractArmedUnitFactory(SoldierType infantryman,
 			SoldierType mobileUnit, WeaponType offensiveType,
 			WeaponType defensiveType) {
@@ -25,6 +23,22 @@ public abstract class AbstractArmedUnitFactory implements ArmedUnitFactory {
 		this.defensiveType = defensiveType;
 	}
 
+	public SoldierType getInfantryman() {
+		return infantryman;
+	}
+
+	public SoldierType getMobileUnit() {
+		return mobileUnit;
+	}
+
+	public WeaponType getOffensiveType() {
+		return offensiveType;
+	}
+
+	public WeaponType getDefensiveType() {
+		return defensiveType;
+	}
+	
 	@Override
 	public ArmedUnit createInfantryman(String name) {
 		return createArmedUnit(name, infantryman);

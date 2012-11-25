@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,12 +14,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import builder.BuilderType;
+
 import soldier.ArmedUnit;
 import soldier.SoldierType;
 import soldier.impl.ArmedUnitSoldier;
 import weapon.WeaponType;
 import army.impl.Squadron;
 import army.impl.VisitorArmyCount;
+import army.impl.VisitorArmyStatement;
 
 public class SquadronTest {
 
@@ -235,6 +239,42 @@ public class SquadronTest {
 		assertTrue( monkeys.accept(v) == twelveMonkeys);
 		v.setSoldierType(SoldierType.Horseman);
 		assertTrue( monkeys.accept(v) == 0);
+		
+		Army montmirailleArmy = new Squadron("horsemen");
+		rabbids.addEquipment(WeaponType.Deathnote.toString()); //it's safe with those guys
+		((Squadron) montmirailleArmy).addAllArmies(horsemen);
+		
+		montmirailleArmy.addEquipment(WeaponType.Sword.toString());
+		montmirailleArmy.addEquipment(WeaponType.Shield.toString());
+		
+		monkeys.addEquipment(WeaponType.AK47.toString());
+		monkeys.addEquipment(WeaponType.BallisticVest.toString());
+		
+		
+		
+		compagnie7.addArmy(monkeys);
+		compagnie7.addArmy(rabbids);
+		compagnie7.addArmy(montmirailleArmy);
+		
+		VisitorArmyStatement visitorArmyStatement = new VisitorArmyStatement();
+		compagnie7.accept(visitorArmyStatement);
+		try {
+			visitorArmyStatement.save(compagnie7.getName());
+		} catch (IOException e) {
+			System.out.println("No such a file");
+			e.printStackTrace();
+		}
+		
+		visitorArmyStatement.init();
+		visitorArmyStatement.setStatement(BuilderType.HTML);
+		compagnie7.accept(visitorArmyStatement);
+		
+		try {
+			visitorArmyStatement.save(compagnie7.getName());
+		} catch (IOException e) {
+			System.out.println("No such a file");
+			e.printStackTrace();
+		}
 	}
 
 }
