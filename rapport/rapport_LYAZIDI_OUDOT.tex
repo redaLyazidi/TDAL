@@ -93,12 +93,12 @@ chaque unité ne subit pas le même nombre de dégâts.
 Pour résumer chaque soldat du même escadron subit autant de dégâts que
 ses frères et si l'un d'eux est un escadron il les répartit parmi à ses
 fils.
-Ainsi les dégâts qu'une unité subit dépend de 2 paramètre :
+Ainsi les dégâts qu'une unité subit dépend de 2 paramètres :
 \begin{enumerate}
 \item le nombre de d'armées dans l'escadron car plus il y a de membres plus
 les dégâts sont divisés
 \item son niveau dans la hiérarchie (l'arbre), car plus on en descend dans la
-composition plus les dégâts on était dispersé parmi les autres armées.\\
+composition plus les dégâts ont était dispersés parmi les autres sous-armées.\\
 La gestion de l'armement repose sur le principe du composite, on ajoute une arme
 à une armée, si c'est un seul soldat alors on lui ajoute l'arme comme le fait le
 proxy, si c'est un escadron alors on ajoute l'arme à chaque membre de l'escadron,
@@ -120,9 +120,16 @@ Nous devions ainsi implémenter deux traitements :
  \item l'affichage de tous les soldats formant un groupe armé;
  \item le comptage des soldats suivant leur type, au sein d'une armée.
 \end{enumerate}
+
+En premier lieu, le visiteur ne visite que le composite, pour ce qui est des armes
+est du type c'est au proxy de les lui fournir. Certes ceci simplifie énormément,
+mais cela permet notamment d'éviter d'avoir à écrire la méthode "accept" dans
+l'architecture du decorator et pour chaque nouveau type rajouté il fallait le rajouter
+à la fois dans le nouveau type et dans les visiteurs.
+
 \subsubsection{Comptage des armées}
 Pour cela, nous pensions d'abord créer une classe VisitorArmyCount qui compterait, 
-pendant le parcours de l'armée, tout les types de soldats, en les stockant dans 
+pendant le parcours de l'armée, tous les types de soldats, en les stockant dans 
 une Hashmap. Cependant, dans l'optique de ne pas risquer d'effets de bord (par 
 exemple en utilisant plusieurs fois la même instance du visiteur) nous avons 
 préféré utiliser la généricité. Il nous est alors possible de retourner 
@@ -140,6 +147,24 @@ classe si un nouveau type de soldat est rajouté.
 La solution retenue est passer le filtre en attribut, et normalement cette attribut ne 
 change pas pendant que le visiteur visite une armée. 
 Son utilisation commence par la méthode "accept" par une instance de type "Army".
+Mais il peut être réutilisé à l'infini car à aucun moment le compte est stocké dans
+l'instance.
+
+\subsubsection{Affichage des soldats}
+Contrairement au précédent, ce visiteur n'est en aucun cas fonctionnel,
+en effet il stocke le compte-rendu à chaque visite.
+Afin de pouvoir choisir son format, le VisitorArmyStatement contient un Builder,
+ainsi on peut aisément choisir un affichage en texte brut ou en html, pour d'autre
+format il suffit de les implémenter et cela n'affecte en aucun cas le visiteur et encore 
+moins l'armée. Pour réutiliser le visitor il suffit d'utiliser la méthode "init",
+qui réinitialise le visiteur. L'affichage est copié du langage YAML basé sur les 
+tabulations. \\
+De plus la méthode "save" permet d'enregistrer dans un fichier le rapport sur l'armée.
+Ceci a permet de se familiariser avec le nouveau système de fichier de Java, java.nio2.
+
+\includegraphics[scale=0.75]{../UML/Visitor}
+
+
 \subsection{Observer}
 Ce pattern a pour but de permettre d'observer les instances d'une classe en étant notifié par la classe observée d'un changement au sein de celle-çi. Il nous a donc été demandé d'implémenter deux observateurs :
 \begin{itemize}
@@ -173,4 +198,43 @@ Le premier observateur, permettant de suivre les combats, a été nommé Observe
 Dans le cas d'une instance de Squadron, il va être notifié lorsque toutes les unités de celui-ci auront été tuées, et que le bataillon sera donc décimé. Il affichera alors le nom du bataillon décimé. S'il est notifié par une instance d'une classe implémentant AbstractSoldier lors de la mort du soldat, alors il affichera le nom du soldat tué.
 Le second observateur, permettant de compter les morts, a été nommé ObserverDeathCount. Il observe quant à lui des instances de AbstractSoldier. Lorsqu'il va être notifié par une classe implémentant la classe abstraite, au moment où un soldat tombe, il va incrémenter son compte de morts, et afficher celui-ci.
 
+\subsection{Abstract Factory}
+Certes le pattern proxy permet de limiter le nombre d'armes, toutefois il n'empêche
+pas les incohérences, comme avoir un bouclier et un sabre laser.
+Ainsi une factory a été mise en place afin d'offrir à l'utilisateur la possibilité
+de créer des soldats armés sans se soucier de faire correspondre leurs armes à leur
+époque. Ainsi les services offerts par cette factory sont de pouvoir créer
+soit de l'infanterie ou des soldats mobiles (cavalier par exemple...),
+sans arme, avec une arme offensive ou defensive ou les deux.
+
+\includegraphics[scale=1]{../UML/AbstractFactory}
+
+La classe abstraite possède 4 attributs 
+\begin{enumerate}
+\item le type de l'infanterie (Infantryman pour MiddleAge)
+\item le type des unités mobiles (cavalerie)
+\item celui de l'arme offensive
+\item et celui de l'arme défensive
+\end{enumerate}
+
+\textbf{Toute} l'implémentation se trouve dans la classe abstraite,
+les factory concrètes ne font que surcharger le constructeur pour lui passer
+la combinaison de types souhaitée. Techniquement cette classe n'a pas à être abstraite,
+ainsi si l'utilisateur souhaite une nouvelle combinaison il suffit juste d'hériter
+la factory abstraite et de préciser dans le constructeur par défaut la combinaison.
+
+\newpage
+
+\section{Test et Conclusion}
+La plupart des tests sont des tests unitaires, tous les tests sont dans le répertoire
+"test" situé à la racine du projet, ces tests assurent le bon fonctionnement de
+l'implémentation, les tests du visiteur comptant les effectifs se trouvent avec
+celui du composite "SquadronTest". Pour le visiteur responsable de l'affichage
+un main "TestVisitor" permet d'enregistrer le compte-rendu dans le répertoire
+"ArmyReport". En effet pour ce programme un test visuel était plus facile à mettre en 
+place. \\
+En conclusion, ce travail nous a permis d'implémenter une combinaison de design pattern,
+en premier lieu ceci nous a permis de mieux les comprendre mais aussi de pouvoir juger
+de leurs limites. En effet pour ce qui est de la gestion des armes, des attributs ou une 
+structure de données aurait été préférable. Pour le comptage la délégation aurait suffit.
 \end{document}
