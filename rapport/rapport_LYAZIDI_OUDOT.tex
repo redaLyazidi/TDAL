@@ -132,7 +132,14 @@ visiteur. Toutefois pour filtrer le comptage (par exemple ne compter que la
 cavalerie, un paramètre représentant le type cherché est en attribut, si il est 
 nul alors tout type d'unité sera compté. En effet pour que cela 100\% 
 fonctionnel il aurait été nécessaire de passer en paramètre le filtre, donc même
-dans les méthodes "accept", mais cela obligerait aux autres visiteurs
+dans les méthodes "accept", mais cela obligerait aux autres visiteurs de devoir les avoir
+en argument même s'ils ne sont pas traités.\\
+Une autre solution aurait été de faire une classe héritant de VisitorArmyCount par
+type de soldat, mais cette solution est lourde et elle oblige la création d'une nouvelle
+classe si un nouveau type de soldat est rajouté.
+La solution retenue est passer le filtre en attribut, et normalement cette attribut ne 
+change pas pendant que le visiteur visite une armée. 
+Son utilisation commence par la méthode "accept" par une instance de type "Army".
 \subsection{Observer}
 Ce pattern a pour but de permettre d'observer les instances d'une classe en étant notifié par la classe observée d'un changement au sein de celle-çi. Il nous a donc été demandé d'implémenter deux observateurs :
 \begin{itemize}
