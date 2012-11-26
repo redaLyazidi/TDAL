@@ -134,5 +134,22 @@ nul alors tout type d'unité sera compté. En effet pour que cela 100\%
 fonctionnel il aurait été nécessaire de passer en paramètre le filtre, donc même
 dans les méthodes "accept", mais cela obligerait aux autres visiteurs
 \subsection{Observer}
+Ce pattern a pour but de permettre d'observer les instances d'une classe en étant notifié par la classe observée d'un changement au sein de celle-çi. Il nous a donc été demandé d'implémenter deux observateurs :
+\begin{enumerate}
+\item[\textbf{Observateur de rapport :}] utilisé pour rapporter les soldats qui tombent et les groupes de combats décimés; 
+\item[\textbf{Observateur de comptage :}] utilisé pour compter les soldats tombés au cours du conflit. 
+\end{enumerate}
+De plus, chacun des observateurs devaient être des singletons, afin d'éviter une instanciation multiple et de risquer une incohérence de l'observation.
+
+Pour celà, nous avons choisi d'implémenter notre propre classe ALObservable, héritant de la classe Observable de Java. En effet, nous avons simplifié l'utilisation de celle-çi en rendant l'appel à la méthode setChanged() automatique lors de la notification des observateurs.
+Nous avons alors rendu deux classes observables :
+\begin{enumerate}
+\item[\textbf{AbstractSoldier :}] afin de pouvoir observer tout type de soldat;
+\item[\textbf{Squadron :}] afin de pouvoir observer les armées .
+\end{enumerate}
+
+Le premier observateur, permettant de suivre les combats, a été nommé ObserverWarReporter. Il permet d'observer des instances de AbstractSoldier et de Squadron.
+Dans le cas d'une instance de Squadron, il va être notifié lorsque toutes les unités de celui-çi auront été tuées, et que le bataillon sera donc décimé. Il affichera alors le nom du bataillon décimé. S'il est notifié par une instance d'une classe implémentant AbstractSoldier lors de la mort du soldat, alors il affichera le nom du soldat tué.
+Le second observateur, permettant de compter les morts, a été nommé ObserverDeathCount. Il observe quant à lui des instances de AbstractSoldier. Lorsqu'il va être notifié par une classe implémentant la classe abstraite, au moment où un soldat tombe, il va incrémenter son compte de morts, et afficher celui-çi.
 
 \end{document}
