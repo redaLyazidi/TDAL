@@ -111,13 +111,28 @@ conséquence, mais la méthode n'est pas bloquante.
 Une armée est morte quand \textbf{tous} ses soldats sont morts.
 \end{enumerate}
 \subsection{Visitor}
-Le pattern Visitor, qui se couple très bien avec le précédent pattern, le pattern Composite, permet de \textbf{visiter} la composition créée par celui-çi. Cela permet de faire remonter une information sans connaître l'intérieur de la composition.
+Le pattern Visitor, qui se couple très bien avec le précédent pattern, le pattern 
+Composite, permet de \textbf{visiter} la composition créée par celui-çi. Cela 
+permet de faire remonter une information sans connaître l'intérieur de la 
+composition.
 Nous devions ainsi implémenter deux traitements :
 \begin{enumerate}
  \item l'affichage de tous les soldats formant un groupe armé;
  \item le comptage des soldats suivant leur type, au sein d'une armée.
 \end{enumerate}
-Pour cela, nous pensions d'abord créer une classe VisitorArmyCount qui compterait, pendant le parcours de l'armée, tout les types de soldats, en les stockant dans une Hashmap. Cependant, dans l'optique de ne pas risquer d'effets de bord (par exemple en utilisant plusieurs fois la même instance du visiteur) nous avons préféré utiliser la généricité. Il nous est alors possible de retourner différentes valeurs (telles que Integer et Void) lors du parcours, afin de remonter le nombre de soldats d'un type donné, alors passé en paramètre du visiteur.
+\subsubsection{Comptage des armées}
+Pour cela, nous pensions d'abord créer une classe VisitorArmyCount qui compterait, 
+pendant le parcours de l'armée, tout les types de soldats, en les stockant dans 
+une Hashmap. Cependant, dans l'optique de ne pas risquer d'effets de bord (par 
+exemple en utilisant plusieurs fois la même instance du visiteur) nous avons 
+préféré utiliser la généricité. Il nous est alors possible de retourner 
+différentes valeurs (telles que Integer et Void) lors du parcours, afin de 
+remonter le nombre de soldats d'un type donné, alors passé en paramètre du 
+visiteur. Toutefois pour filtrer le comptage (par exemple ne compter que la 
+cavalerie, un paramètre représentant le type cherché est en attribut, si il est 
+nul alors tout type d'unité sera compté. En effet pour que cela 100\% 
+fonctionnel il aurait été nécessaire de passer en paramètre le filtre, donc même
+dans les méthodes "accept", mais cela obligerait aux autres visiteurs
 \subsection{Observer}
 
 \end{document}
